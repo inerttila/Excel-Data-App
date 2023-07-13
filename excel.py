@@ -4,6 +4,8 @@ from tkinter import Tk, simpledialog, Label, StringVar, Button, OptionMenu, Entr
 from openpyxl.styles import Font, PatternFill
 from tkcalendar import Calendar, DateEntry
 import tkinter.messagebox as messagebox
+from tkinter import Toplevel
+
 
 # Set the file path and name
 file_path = '/Users/skaitech/Desktop/EXCEL/your_file.xlsx'
@@ -24,11 +26,13 @@ except FileNotFoundError:
 worksheet = workbook['Sheet']
 
 # Define the category labels
-categories = ['Date', 'Service Line', 'Type of Service', 'Company', 'Task', 'Hours', 'Notes']
+categories = ['Date', 'Service Line', 'Type of Service',
+              'Company', 'Task', 'Hours', 'Notes']
 
 # Apply font and fill styles to the header row
 header_font = Font(bold=True, color="ffffff")  # Bold font with white color
-header_fill = PatternFill(start_color="061c43", end_color="061c43", fill_type="solid")  # Black background color
+header_fill = PatternFill(start_color="061c43", end_color="061c43",
+                          fill_type="solid")  # Black background color
 
 # Add category labels and apply styles to the header row
 for col_num, category in enumerate(categories, start=1):
@@ -40,7 +44,8 @@ for col_num, category in enumerate(categories, start=1):
 company_options = ['Skaitech', '3DSkai']
 
 # Define the predefined service line options
-service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation', 'Security/AI', 'Immersive Technologies', 'Training', 'Research']
+service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation',
+                   'Security/AI', 'Immersive Technologies', 'Training', 'Research']
 
 # Define the predefined type of service options
 type_of_service_options = ['Software', 'Hardware', 'Other']
@@ -52,6 +57,8 @@ task_options = ['Development', 'Control', 'Research', 'Testing', 'Other']
 input_values = {}
 
 # Function to handle the selection process for each category
+
+
 def select_option(category, options):
     try:
         value = simpledialog.askstring("Data Input", f"Enter {category}:")
@@ -63,12 +70,20 @@ def select_option(category, options):
         messagebox.showerror("Error", str(e))
 
 # Function to handle the calendar selection
+
+
 def select_date():
+    if hasattr(select_date, 'calendar_open') and select_date.calendar_open:
+        return
+
+    select_date.calendar_open = True
+
     def on_date_selected():
         selected_date = cal.selection_get()
         input_values['Date'].set(selected_date.strftime("%Y-%m-%d"))
         date_label.config(text=input_values['Date'].get())
         top.destroy()
+        select_date.calendar_open = False
 
     top = Tk()
     top.title("Select Date")
@@ -78,25 +93,41 @@ def select_date():
     calendar_position_column = 1
 
     cal = Calendar(top)
-    cal.grid(row=calendar_position_row, column=calendar_position_column, padx=10, pady=10)
+    cal.grid(row=calendar_position_row,
+             column=calendar_position_column, padx=10, pady=10)
 
     confirm_button = Button(top, text="Confirm", command=on_date_selected)
-    confirm_button.grid(row=calendar_position_row + 1, column=calendar_position_column, padx=10, pady=10)
+    confirm_button.grid(row=calendar_position_row + 1,
+                        column=calendar_position_column, padx=10, pady=10)
+
+    # Function to handle closing the window
+    def close_window():
+        top.destroy()
+        select_date.calendar_open = False
+
+    # Bind the close_window function to the window close button
+    top.protocol("WM_DELETE_WINDOW", close_window)
 
     top.mainloop()
 
 # Function to handle validation for the Hours field
+
+
 def validate_hours_input(value):
     if value and not value.replace('.', '').isdigit():
         return False
     return True
 
 # Function to handle validation for the Notes field
+
+
 def validate_notes_input(value):
     # Add your custom validation logic for the Notes field here
     return True
 
 # Function to handle the confirmation button click
+
+
 def confirm_input():
     try:
         for i, category in enumerate(categories):
@@ -105,13 +136,15 @@ def confirm_input():
                 raise ValueError("Date must be selected.")
             if category == 'Hours' and not validate_hours_input(value):
                 raise ValueError("Invalid Hours input.")
-            if category == 'Notes' and not validate_notes_input(value):
-                raise ValueError("Invalid Notes input.")
+            if category == 'Notes':
+                # Retrieve the value from the Text widget
+                value = entry.get("1.0", "end-1c")
             worksheet.cell(row=2, column=i + 1, value=value)
         workbook.save(file_path)
         window.destroy()
     except Exception as e:
         messagebox.showerror("Error", str(e))
+
 
 # Create the main window
 window = Tk()
@@ -124,7 +157,8 @@ screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 x_coordinate = (screen_width - window_width) // 2
 y_coordinate = (screen_height - window_height) // 2
-window.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
+window.geometry(
+    f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
 
 for i, category in enumerate(categories):
@@ -135,43 +169,55 @@ for i, category in enumerate(categories):
     # Create option menu for categories with predefined options
     if category == 'Company':
         input_values[category] = StringVar(window, company_options[0])
-        option_menu = OptionMenu(window, input_values[category], *company_options)
-        option_menu.grid(row=i, column=1)  # Display option menu for Task category
-    
+        option_menu = OptionMenu(
+            window, input_values[category], *company_options)
+        # Display option menu for Task category
+        option_menu.grid(row=i, column=1)
+
     elif category == 'Service Line':
         input_values[category] = StringVar(window, service_options[0])
-        option_menu = OptionMenu(window, input_values[category], *service_options)
-        option_menu.grid(row=i, column=1)  # Display option menu for Task category
-    
+        option_menu = OptionMenu(
+            window, input_values[category], *service_options)
+        # Display option menu for Task category
+        option_menu.grid(row=i, column=1)
+
     elif category == 'Type of Service':
         input_values[category] = StringVar(window, type_of_service_options[0])
-        option_menu = OptionMenu(window, input_values[category], *type_of_service_options)
-        option_menu.grid(row=i, column=1)  # Display option menu for Task category
-        
+        option_menu = OptionMenu(
+            window, input_values[category], *type_of_service_options)
+        # Display option menu for Task category
+        option_menu.grid(row=i, column=1)
+
     elif category == 'Task':
         input_values[category] = StringVar(window, task_options[0])
         option_menu = OptionMenu(window, input_values[category], *task_options)
-        option_menu.grid(row=i, column=1)  # Display option menu for Task category
+        # Display option menu for Task category
+        option_menu.grid(row=i, column=1)
     elif category == 'Date':
         input_values[category] = StringVar(window)
-        select_date_button = Button(window, text="Select Date", command=select_date)
+        select_date_button = Button(
+            window, text="Select Date", command=select_date)
         select_date_button.grid(row=i, column=1)
         date_label = Label(window, textvariable=input_values[category])
         date_label.grid(row=i, column=2)
     elif category == 'Hours':
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), '%P')
-        entry = Entry(window, textvariable=input_values[category], validate="key", validatecommand=vcmd)
-        entry.grid(row=i, column=1)
+        entry = Entry(
+            window, textvariable=input_values[category], validate="key", validatecommand=vcmd)
+        # Use sticky='w' to align the entry widget to the left
+        entry.grid(row=i, column=1, sticky='w')
     elif category == 'Notes':
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_notes_input), '%P')
         entry = Text(window, height=4, width=30)
-        entry.grid(row=i, column=1, columnspan=2)
+        # Use sticky='w' to align the entry widget to the left
+        entry.grid(row=i, column=1, columnspan=2, sticky='w')
     else:
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
-        entry.grid(row=i, column=1)
+        # Use sticky='w' to align the entry widget to the left
+        entry.grid(row=i, column=1, sticky='w')
 
 # Add confirm button
 confirm_button = Button(window, text="Confirm", command=confirm_input)
