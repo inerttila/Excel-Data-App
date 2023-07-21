@@ -138,7 +138,7 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
-file_path = '/Users/skaitech/Desktop/excel-data/your_file.xlsx'
+file_path = '/Users/skaitech/Desktop/excel-data/Timesheet-management.xlsx'
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
 company_options = ['Skaitech', '3DSkai', '-']
