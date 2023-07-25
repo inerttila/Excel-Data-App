@@ -6,6 +6,14 @@ from tkcalendar import Calendar, DateEntry
 import tkinter.messagebox as messagebox
 from tkinter import Toplevel
 from openpyxl.styles import Font, PatternFill
+import datetime
+
+
+def create_or_get_sheet(workbook, sheet_name):
+    try:
+        return workbook[sheet_name]
+    except KeyError:
+        return workbook.create_sheet(sheet_name)
 
 
 def create_directory_if_not_exists(file_path):
@@ -91,6 +99,19 @@ def validate_notes_input(value):
     return True
 
 
+def is_last_entry_on_sunday(worksheet):
+    if worksheet.max_row <= 1:
+        return False  # No data in the worksheet
+
+    last_date_value = worksheet.cell(row=worksheet.max_row, column=1).value
+    if last_date_value is not None:
+        last_date_value = datetime.datetime.strptime(
+            last_date_value, "%Y-%m-%d")
+        # Fidaay is represented as 4 in the weekday() function
+        return last_date_value.weekday() == 4
+    return False
+
+
 def confirm_input():
     try:
         row_data = []
@@ -104,7 +125,21 @@ def confirm_input():
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
 
+        # Save data in the original sheet
+
+        # Create or get the "2023" sheet and save data there too
+        sheet_2023 = create_or_get_sheet(workbook, "2023")
+        today = datetime.date.today()
+        is_monday = (today.weekday() == 0)
+        # Check if the last entry in the original sheet is on Sunday
+        if is_last_entry_on_sunday(worksheet) and is_monday:
+            # Add an empty row before appending new data on Monday
+            worksheet.append([])
+            sheet_2023.append([])
+
         worksheet.append(row_data)
+        sheet_2023.append(row_data)
+
         workbook.save(file_path)
 
         for category in categories:
@@ -138,7 +173,7 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
-file_path = '/Users/skaitech/Desktop/excel-data/Timesheet-management.xlsx'
+file_path = '/Users/skaitech/Desktop/excel-data/Timesheet-managementt.xlsx'
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
 company_options = ['Skaitech', '3DSkai', '-']
