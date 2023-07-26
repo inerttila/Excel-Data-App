@@ -9,6 +9,20 @@ from openpyxl.styles import Font, PatternFill
 import datetime
 
 
+def apply_header_styles(worksheet, headers):
+    header_font = Font(bold=True, color="ffffff")
+    header_fill = PatternFill(start_color="061c43",
+                              end_color="061c43", fill_type="solid")
+
+    for col_num, header in enumerate(headers, start=1):
+        cell = worksheet.cell(row=1, column=col_num, value=header)
+        cell.font = header_font
+        cell.fill = header_fill
+
+        row_height = 30
+        worksheet.row_dimensions[1].height = row_height
+
+
 def create_or_get_sheet(workbook, sheet_name):
     try:
         return workbook[sheet_name]
@@ -113,6 +127,7 @@ def is_last_entry_on_sunday(worksheet):
 
 
 def confirm_input():
+    global workbook
     try:
         row_data = []
         for category in categories:
@@ -134,12 +149,15 @@ def confirm_input():
         # Check if the last entry in the original sheet is on Sunday
         if is_last_entry_on_sunday(worksheet) and is_monday:
             # Add an empty row before appending new data on Monday
-            worksheet.append([])
+            sheet_name_to_delete = 'Sheet'
+            delete_sheet("s", sheet_name_to_delete)
+            header_row = ['Date', 'Service Line', 'Type of Service',
+                          'Company', 'Task', 'Hours', 'Notes']
+            create_sheet_with_headers(header_row, row_data)
             sheet_2023.append([])
 
         worksheet.append(row_data)
         sheet_2023.append(row_data)
-
         workbook.save(file_path)
 
         for category in categories:
@@ -189,6 +207,33 @@ workbook = load_or_create_workbook(file_path)
 worksheet = workbook['Sheet']
 
 apply_header_styles(worksheet, categories)
+
+
+def delete_sheet(wb, sheet_name):
+    try:
+        global workbook
+        if sheet_name in workbook.sheetnames:
+            sheet = workbook[sheet_name]
+            workbook.remove(sheet)
+            workbook.save(file_path)
+            print(f"The sheet '{sheet_name}' was deleted successfully.")
+        else:
+            print(f"The sheet '{sheet_name}' does not exist in the workbook.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
+
+
+def create_sheet_with_headers(headers, rd):
+    try:
+        global workbook
+        new_sheet = workbook.create_sheet(title="Sheet", index=0)
+        apply_header_styles(new_sheet, headers)
+        workbook.save(file_path)
+        new_sheet.append(rd)
+        workbook.save(file_path)
+        print(f"A new sheet named 'Sheet' with headers has been created.")
+    except Exception as e:
+        print(f"An error occurred: {str(e)}")
 
 
 window = Tk()
