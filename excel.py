@@ -7,6 +7,9 @@ import tkinter.messagebox as messagebox
 from tkinter import Toplevel
 from openpyxl.styles import Font, PatternFill
 import datetime
+import tkinter as tk
+from tkinter import simpledialog, Toplevel, ttk
+from tkcalendar import Calendar
 
 
 def apply_header_styles(worksheet, headers):
@@ -83,6 +86,13 @@ def select_date():
     top = Toplevel()
     top.title("Select Date")
 
+    style = ttk.Style(top)
+    style.configure('Calendar.Treeview', background='white',
+                    fieldbackground='white')
+    style.configure('TButton', foreground='white',
+                    background='#061c43', font=('Helvetica', 12, 'bold'))
+    style.map('TButton', background=[('active', '#265883')])
+
     calendar_position_row = 0
     calendar_position_column = 0
 
@@ -90,7 +100,7 @@ def select_date():
     cal.grid(row=calendar_position_row,
              column=calendar_position_column, padx=10, pady=10)
 
-    confirm_button = Button(top, text="Confirm", command=on_date_selected)
+    confirm_button = ttk.Button(top, text="Confirm", command=on_date_selected)
     confirm_button.grid(row=calendar_position_row + 1,
                         column=calendar_position_column, padx=10, pady=10)
 
