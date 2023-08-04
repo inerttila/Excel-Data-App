@@ -77,6 +77,7 @@ def select_date():
     select_date.calendar_open = True
 
     def on_date_selected():
+
         selected_date = cal.selection_get()
         input_values['Date'].set(selected_date.strftime("%Y-%m-%d"))
         date_label.config(text=input_values['Date'].get())
