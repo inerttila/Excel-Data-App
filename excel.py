@@ -87,12 +87,27 @@ def select_option(category, options):
 
 
 def select_date():
-    # Function to be executed on date selection
+    # Check if the 'calendar_open' attribute exists in the function and if it's True
+
+    if hasattr(select_date, 'calendar_open') and select_date.calendar_open:
+        # If the calendar window is already open, return without opening another instance
+
+        return
+
+    select_date.calendar_open = True
+
     def on_date_selected():
+        # Get the selected date from the calendar widget
+
         selected_date = cal.selection_get()
+        # Update the 'Date' entry with the selected date in the format YYYY-MM-DD
+
         input_values['Date'].set(selected_date.strftime("%Y-%m-%d"))
+        # Update the 'date_label' with the selected date
+
         date_label.config(text=input_values['Date'].get())
         top.destroy()
+        select_date.calendar_open = False
 
     # Create and configure the top-level window for the calendar widget
     top = Toplevel()
