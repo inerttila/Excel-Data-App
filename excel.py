@@ -203,15 +203,23 @@ def confirm_input():
             if category == 'Notes':
                 entry.delete(1.0, "end")
 
-            # Reset the option menus to the default value
+            # Reset the option menus to the default value based on the selected category.
+
             if category == 'Company':
+                # If the category is 'Company', reset the company_option_menu to its default state.
                 reset_option_menu(company_option_menu, company_options)
+
             elif category == 'Service Line':
+                # If the category is 'Service Line', reset the service_line_option_menu to its default state.
                 reset_option_menu(service_line_option_menu, service_options)
+
             elif category == 'Type of Service':
+                # If the category is 'Type of Service', reset the type_of_service_option_menu to its default state.
                 reset_option_menu(type_of_service_option_menu,
                                   type_of_service_options)
+
             elif category == 'Task':
+                # If the category is 'Task', reset the task_option_menu to its default state.
                 reset_option_menu(task_option_menu, task_options)
 
         # Show a success message to the user
