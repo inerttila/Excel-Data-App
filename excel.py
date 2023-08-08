@@ -7,6 +7,9 @@ import tkinter.messagebox as messagebox
 from tkinter import Toplevel
 from openpyxl.styles import Font, PatternFill
 import datetime
+import tkinter as tk
+from tkinter import simpledialog, Toplevel, ttk
+from tkcalendar import Calendar
 
 
 def apply_header_styles(worksheet, headers):
@@ -82,15 +85,22 @@ def select_date():
 
     top = Toplevel()
     top.title("Select Date")
+    top.configure(background='#333333')
 
-    calendar_position_row = 0
-    calendar_position_column = 0
+    style = ttk.Style(top)
+    style.configure('Calendar.Treeview', background='black',
+                    foreground='black', fieldbackground='black')
 
+    style.configure('TButton', foreground='black',
+                    background='#061c43', font=('Helvetica', 9, 'bold'))
+
+    calendar_position_row = 1
+    calendar_position_column = 1
     cal = Calendar(top)
     cal.grid(row=calendar_position_row,
              column=calendar_position_column, padx=10, pady=10)
 
-    confirm_button = Button(top, text="Confirm", command=on_date_selected)
+    confirm_button = ttk.Button(top, text="Confirm", command=on_date_selected)
     confirm_button.grid(row=calendar_position_row + 1,
                         column=calendar_position_column, padx=10, pady=10)
 
@@ -191,7 +201,7 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
-file_path = '/Users/skaitech/Desktop/excel-data/Timesheet-managementt.xlsx'
+file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
 company_options = ['Skaitech', '3DSkai', '-']
@@ -238,6 +248,7 @@ def create_sheet_with_headers(headers, rd):
 
 window = Tk()
 window.title("Data Input")
+window.configure(background='#333333')
 
 window_width = 600
 window_height = 400
@@ -250,7 +261,8 @@ window.geometry(
 
 
 for i, category in enumerate(categories):
-    label = Label(window, text=category)
+    label = Label(window, text=category,
+                  background='#333333', foreground='white')
     label.grid(row=i, column=0)
 
     if category == 'Company':
