@@ -11,6 +11,8 @@ import tkinter as tk
 from tkinter import simpledialog, Toplevel, ttk
 from tkcalendar import Calendar
 
+# Function to apply header styles to a worksheet
+
 
 def apply_header_styles(worksheet, headers):
     header_font = Font(bold=True, color="ffffff")
@@ -25,6 +27,8 @@ def apply_header_styles(worksheet, headers):
         row_height = 30
         worksheet.row_dimensions[1].height = row_height
 
+# Function to create or get a sheet from a workbook
+
 
 def create_or_get_sheet(workbook, sheet_name):
     try:
@@ -32,10 +36,14 @@ def create_or_get_sheet(workbook, sheet_name):
     except KeyError:
         return workbook.create_sheet(sheet_name)
 
+# Function to create a directory if it doesn't exist
+
 
 def create_directory_if_not_exists(file_path):
     directory = os.path.dirname(file_path)
     os.makedirs(directory, exist_ok=True)
+
+# Function to load or create a workbook
 
 
 def load_or_create_workbook(file_path):
@@ -43,6 +51,8 @@ def load_or_create_workbook(file_path):
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
         return openpyxl.Workbook()
+
+# Function to apply header styles for categories in a worksheet
 
 
 def apply_header_styles(worksheet, categories):
@@ -58,6 +68,8 @@ def apply_header_styles(worksheet, categories):
         row_height = 30
         worksheet.row_dimensions[1].height = row_height
 
+# Function to handle user input for categories with options
+
 
 def select_option(category, options):
     try:
@@ -68,6 +80,8 @@ def select_option(category, options):
             raise ValueError("Invalid option selected.")
     except ValueError as e:
         messagebox.showerror("Error", str(e))
+
+# Function to handle selection of a date
 
 
 def select_date():
@@ -83,34 +97,43 @@ def select_date():
         top.destroy()
         select_date.calendar_open = False
 
+    # Create a pop-up window for date selection
     top = Toplevel()
     top.title("Select Date")
     top.configure(background='#333333')
 
+    # Configure style for the calendar and buttons
     style = ttk.Style(top)
-    style.configure('Calendar.Treeview', background='black',
-                    foreground='black', fieldbackground='black')
+    style.configure('Calendar.Treeview', background='#333333',
+                    foreground='white', fieldbackground='#333333')
 
     style.configure('TButton', foreground='black',
-                    background='#061c43', font=('Helvetica', 9, 'bold'))
-
+                    background='#061c43', font=('Arial', 9, 'bold'))
+    # Create a calendar widget for date selection
     calendar_position_row = 1
     calendar_position_column = 1
     cal = Calendar(top)
     cal.grid(row=calendar_position_row,
              column=calendar_position_column, padx=10, pady=10)
 
-    confirm_button = ttk.Button(top, text="Confirm", command=on_date_selected)
+    # Create a "Confirm" button for date selection
+    confirm_button = ttk.Button(
+        top, text="Confirm", command=on_date_selected, style='TButton')
     confirm_button.grid(row=calendar_position_row + 1,
                         column=calendar_position_column, padx=10, pady=10)
 
+    # Function to close the pop-up window
     def close_window():
         top.destroy()
         select_date.calendar_open = False
 
+    # Configure the behavior of the close button
     top.protocol("WM_DELETE_WINDOW", close_window)
 
+    # Start the main event loop for the pop-up window
     top.mainloop()
+
+# Function to validate hours input
 
 
 def validate_hours_input(value):
@@ -118,9 +141,13 @@ def validate_hours_input(value):
         return False
     return True
 
+# Function to validate notes input
+
 
 def validate_notes_input(value):
     return True
+
+# Function to check if the last entry in the worksheet is on a Sunday
 
 
 def is_last_entry_on_sunday(worksheet):
@@ -131,7 +158,7 @@ def is_last_entry_on_sunday(worksheet):
     if last_date_value is not None:
         last_date_value = datetime.datetime.strptime(
             last_date_value, "%Y-%m-%d")
-        # Fidaay is represented as 4 in the weekday() function
+        # Friday is represented as 4 in the weekday() function
         return last_date_value.weekday() == 4
     return False
 
@@ -170,6 +197,7 @@ def confirm_input():
         sheet_2023.append(row_data)
         workbook.save(file_path)
 
+        # Reset input values and user interface elements
         for category in categories:
             input_values[category].set('')
 
@@ -191,6 +219,8 @@ def confirm_input():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
+# Function to reset an option menu with new options
+
 
 def reset_option_menu(option_menu, options):
     menu = option_menu['menu']
@@ -201,6 +231,7 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
+# File path and initial data setup
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
@@ -211,12 +242,15 @@ type_of_service_options = ['Software', 'Hardware', 'Other', '-']
 task_options = ['Development', 'Control', 'Research', 'Testing', 'Other', '-']
 input_values = {}
 
-
+# Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
 workbook = load_or_create_workbook(file_path)
 worksheet = workbook['Sheet']
 
+# Apply header styles to the worksheet
 apply_header_styles(worksheet, categories)
+
+# Function to delete a sheet from the workbook
 
 
 def delete_sheet(wb, sheet_name):
@@ -232,6 +266,8 @@ def delete_sheet(wb, sheet_name):
     except Exception as e:
         print(f"An error occurred: {str(e)}")
 
+# Function to create a new sheet with headers and data
+
 
 def create_sheet_with_headers(headers, rd):
     try:
@@ -246,12 +282,14 @@ def create_sheet_with_headers(headers, rd):
         print(f"An error occurred: {str(e)}")
 
 
+# Create the main application window
 window = Tk()
 window.title("Data Input")
 window.configure(background='#333333')
 
-window_width = 600
-window_height = 400
+# Set the dimensions and position of the window
+window_width = 400
+window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 x_coordinate = (screen_width - window_width) // 2
@@ -259,12 +297,13 @@ y_coordinate = (screen_height - window_height) // 2
 window.geometry(
     f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
-
+# Create labels and input fields for each category
 for i, category in enumerate(categories):
     label = Label(window, text=category,
                   background='#333333', foreground='white')
     label.grid(row=i, column=0)
 
+    # Create input fields based on the category
     if category == 'Company':
         input_values[category] = StringVar(window, company_options[0])
         company_option_menu = OptionMenu(
@@ -304,20 +343,22 @@ for i, category in enumerate(categories):
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), '%P')
         entry = Entry(
-            window, textvariable=input_values[category], validate="key", validatecommand=vcmd)
+            window, textvariable=input_values[category], validate="key", validatecommand=vcmd, font=('Arial', 10))
         entry.grid(row=i, column=1, sticky='w')
     elif category == 'Notes':
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_notes_input), '%P')
-        entry = Text(window, height=4, width=26)
+        entry = Text(window, height=4, width=26, font=('Arial', 10))
         entry.grid(row=i, column=1, columnspan=2, sticky='w')
+
     else:
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky='w')
 
-
+# Create a "Confirm" button for submitting input
 confirm_button = Button(window, text="Confirm", command=confirm_input)
 confirm_button.grid(row=len(categories), column=0, columnspan=2, pady=10)
 
+# Start the main event loop for the application window
 window.mainloop()
