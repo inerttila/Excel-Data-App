@@ -284,8 +284,10 @@ def create_sheet_with_headers(headers, rd):
 
 # Create the main application window
 window = Tk()
-window.title("Data Input")
+window.title("Timesheet Application")
 window.configure(background='#333333')
+icon = tk.PhotoImage(file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\otr.png')
+window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
 window_width = 400

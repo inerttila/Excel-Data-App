@@ -14,7 +14,7 @@ int main() {
 
     // Print "made by Inert" along with Python version
     std::cout << "Python is installed. Version: ";
-    std::system("python --version && echo made by Inert");
+    std::system("python --version && echo Made by Inert");
 
     // Build and execute the shell command to run the Python script
     std::string command = "python ";
