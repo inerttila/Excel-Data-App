@@ -28,10 +28,7 @@ To run this application, you need the following:
 - Python 3.x (Check your Python version using `python --version`)
 - C++ build environment and compatible compiler (for the C++ part)
 - Required Python packages (specified in `requirements.txt`)
-  
-```bash
-pip install -r requirements.txt
-```
+
 
 ## Installation
 
