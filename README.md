@@ -33,8 +33,8 @@ To run this application, you need the following:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/inerttila/timesheet-management.git
-cd timesheet-management
+git clone https://github.com/inerttila/excel-data.git
+cd excel-data
 ```
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
 
@@ -55,5 +55,3 @@ Fill in the required information using the user interface, and click the "Confir
 
 ## Contact
 For inquiries or assistance, feel free to contact me at inert.etila@gmail.com.
-
-' This content can be directly copied and pasted into your project's README.md file, and you can continue writing any additional information or details you need.
