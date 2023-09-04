@@ -48,7 +48,7 @@ pip install -r requirements.txt
 
 Make sure you have the necessary C++ build environment and a compatible C++ compiler installed if you intend to use the C++ part of the project.
 
-Usage
+## Usage
 Execute the Python script to run the application:
 
 python timesheet_app.py
@@ -57,6 +57,7 @@ The application window will open, allowing you to input your work-related data.
 
 Fill in the required information using the user interface, and click the "Confirm" button to save the data.
 
-Contact
-If you have any questions or need assistance, you can contact "MY G" at inert.etila@gmail.com.
+## Contact
+
+For inquiries or assistance, feel free to contact me at [inert.etila@gmail.com](mailto:inert.etila@gmail.com).
 
