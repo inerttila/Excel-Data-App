@@ -9,7 +9,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Compiling the C++ Part (main.cpp)](#compiling-the-c-part-maincpp)
 - [Usage](#usage)
 - [Contact](#contact)
-- 
+  
 ## Introduction
 
 The Timesheet Management Application simplifies the process of recording and managing work-related data, making it efficient and user-friendly. It offers the following key features:
