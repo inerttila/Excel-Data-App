@@ -21,6 +21,17 @@ The Timesheet Management Application simplifies the process of recording and man
 - An organized and visually appealing user interface.
 - Data is saved in an Excel workbook for record-keeping and analysis.
 
+Additionally, here are some important details about the application:
+
+- **Weekly Sheet**: Every week, the weekly sheet is cleared, allowing you to start fresh for the new week's work entries.
+
+- **Yearly Sheet**: The yearly sheet is designed to print an empty line at the beginning of each week, making it easy to separate data by week.
+
+- **Customizable Pop-Up Window Style**: The application provides control over the style of pop-up windows using Python, allowing you to tailor the user interface to your preferences.
+
+This application empowers you to efficiently track and manage your work hours and tasks, providing a versatile solution for your timesheet needs.
+
+
 ## Requirements
 
 To run this application, you need the following:
