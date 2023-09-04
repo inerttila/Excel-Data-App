@@ -27,6 +27,10 @@ To run this application, you need the following:
 - Python 3.x (Check your Python version using `python --version`)
 - C++ build environment and compatible compiler (for the C++ part)
 - Required Python packages (specified in `requirements.txt`)
+  
+```bash
+pip install -r requirements.txt
+```
 
 ## Installation
 
@@ -47,11 +51,22 @@ Make sure you have the necessary C++ build environment and a compatible C++ comp
 ## Usage
 Execute the Python script to run the application:
 ```bash
-python timesheet_app.py
+python excel.py
 ```
 The application window will open, allowing you to input your work-related data.
 
 Fill in the required information using the user interface, and click the "Confirm" button to save the data.
 
+# Compiling the C++ Part (main.cpp)
+
+To compile the C++ part of the application, follow these steps:
+
+1. Open your command prompt or terminal.
+2. Navigate to the project's root directory.
+3. Use the `g++` command to compile the `main.cpp` file and create an executable named `timesheet_app`. Run the following command:
+
+```bash
+g++ main.cpp -o timesheet_app
+```
 ## Contact
 For inquiries or assistance, feel free to contact me at inert.etila@gmail.com.
