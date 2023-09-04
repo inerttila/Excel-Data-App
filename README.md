@@ -8,7 +8,6 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Requirements](#requirements)
 - [Installation](#installation)
 - [Usage](#usage)
-- [License](#license)
 - [Contact](mailto:inert.etila@gmail.com)
 
 ## Introduction
