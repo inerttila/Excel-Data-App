@@ -64,6 +64,17 @@ Execute the Python script to run the application:
 ```bash
 python excel.py
 ```
+When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `excel-data` folder within the project directory.
+
+### Customizing the File Path
+
+You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
+
+1. Locate the following line of code in the Python script (`excel.py`):
+
+   ```python
+   file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+   
 The application window will open, allowing you to input your work-related data.
 
 Fill in the required information using the user interface, and click the "Confirm" button to save the data.
