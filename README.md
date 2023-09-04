@@ -38,6 +38,8 @@ Clone the repository to your local machine:
 
 ```bash
 git clone https://github.com/inerttila/excel-data.git
+```
+```bash
 cd excel-data
 ```
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
