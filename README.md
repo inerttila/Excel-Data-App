@@ -35,3 +35,28 @@ Clone the repository to your local machine:
 ```bash
 git clone https://github.com/your-username/timesheet-management.git
 cd timesheet-management
+```
+Ensure you have Python installed on your system. If not, install or update it from the Python official website.
+
+Install the required Python packages by running the following command in the project's root directory:
+```bash
+pip install -r requirements.txt
+```
+Make sure you have the necessary C++ build environment and a compatible C++ compiler installed if you intend to use the C++ part of the project.
+
+## Usage
+Execute the Python script to run the application:
+```bash
+python timesheet_app.py
+```
+The application window will open, allowing you to input your work-related data.
+
+Fill in the required information using the user interface, and click the "Confirm" button to save the data.
+
+## Contact
+For inquiries or assistance, feel free to contact me at inert.etila@gmail.com.
+
+You can copy and paste this content into a single README.md file for your project. Remember to replace "your-username" in the clone URL with your actual GitHub username when sharing your repository.
+
+
+' This content can be directly copied and pasted into your project's README.md file, and you can continue writing any additional information or details you need.
