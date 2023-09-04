@@ -9,7 +9,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Installation](#installation)
 - [Usage](#usage)
 - [License](#license)
-- [Contact](#contact)
+- [Contact](mailto:inert.etila@gmail.com)
 
 ## Introduction
 
