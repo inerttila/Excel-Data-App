@@ -33,7 +33,7 @@ To run this application, you need the following:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/your-username/timesheet-management.git
+git clone https://github.com/inerttila/timesheet-management.git
 cd timesheet-management
 ```
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
@@ -55,8 +55,5 @@ Fill in the required information using the user interface, and click the "Confir
 
 ## Contact
 For inquiries or assistance, feel free to contact me at inert.etila@gmail.com.
-
-You can copy and paste this content into a single README.md file for your project. Remember to replace "your-username" in the clone URL with your actual GitHub username when sharing your repository.
-
 
 ' This content can be directly copied and pasted into your project's README.md file, and you can continue writing any additional information or details you need.
