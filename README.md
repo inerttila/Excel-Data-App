@@ -23,10 +23,10 @@ The Timesheet Management Application simplifies the process of recording and man
 
 Additionally, here are some important details about the application:
 
-### Weekly Sheet
+#### Weekly Sheet
 Every week, the weekly sheet is cleared, allowing you to start fresh for the new week's work entries. This ensures that your data is neatly organized by week, making it easier to track your work hours.
 
-### Yearly Sheet
+#### Yearly Sheet
 The yearly sheet is designed to print an empty line at the beginning of each week, making it easy to separate data by week. This feature enhances the readability and organization of your work records over time.
 
 ### Customizable Pop-Up Window Style
