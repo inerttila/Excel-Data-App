@@ -29,7 +29,7 @@ Every week, the weekly sheet is cleared, allowing you to start fresh for the new
 #### Yearly Sheet
 The yearly sheet is designed to print an empty line at the beginning of each week, making it easy to separate data by week. This feature enhances the readability and organization of your work records over time.
 
-### Customizable Pop-Up Window Style
+#### Customizable Pop-Up Window Style
 The application provides control over the style of pop-up windows using Python, allowing you to tailor the user interface to your preferences. You can modify the appearance and behavior of pop-up windows to match your desired style and user experience.
 
 Feel free to customize the Excel file style, including fonts, colors, and more, to suit your specific needs and preferences. This level of control ensures that your work records are not only accurate but also visually appealing and organized.
