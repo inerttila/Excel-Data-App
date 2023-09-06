@@ -77,9 +77,9 @@ You can customize the file path where the Excel file is saved based on your pref
 
 1. Locate the following line of code in the Python script (`excel.py`):
 
-   ```python
-   file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
-   
+```python
+  file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+```
 The application window will open, allowing you to input your work-related data.
 
 Fill in the required information using the user interface, and click the "Confirm" button to save the data.
