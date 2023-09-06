@@ -51,23 +51,23 @@ To run this application, you need the following:
 Clone the repository to your local machine:
 
 ```bash
-git clone https://github.com/inerttila/excel-data.git
+  git clone https://github.com/inerttila/excel-data.git
 ```
 ```bash
-cd excel-data
+  cd excel-data
 ```
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
 
 Install the required Python packages by running the following command in the project's root directory:
 ```bash
-pip install -r requirements.txt
+  pip install -r requirements.txt
 ```
 Make sure you have the necessary C++ build environment and a compatible C++ compiler installed if you intend to use the C++ part of the project.
 
 ## Usage
 Execute the Python script to run the application:
 ```bash
-python excel.py
+  python excel.py
 ```
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `excel-data` folder within the project directory.
 
@@ -93,7 +93,7 @@ To compile the C++ part of the application, follow these steps:
 3. Use the `g++` command to compile the `main.cpp` file and create an executable named `timesheet_app`. Run the following command:
 
 ```bash
-g++ main.cpp -o timesheet_app
+  g++ main.cpp -o timesheet_app
 ```
 ## Contact
 
