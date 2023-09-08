@@ -120,6 +120,11 @@ def select_date():
     top.title("Select Date")
     top.configure(background='#333333')
 
+    # Set the icon for the pop-up window
+    icon = tk.PhotoImage(
+        file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png')
+    top.iconphoto(False, icon)
+
     # Configure style for the calendar and buttons
     style = ttk.Style(top)
     style.configure('Calendar.Treeview', background='#333333',
@@ -304,7 +309,8 @@ def create_sheet_with_headers(headers, rd):
 window = Tk()
 window.title("Timesheet Application")
 window.configure(background='#333333')
-icon = tk.PhotoImage(file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\otr.png')
+icon = tk.PhotoImage(
+    file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png')
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
