@@ -18,13 +18,16 @@ def display_weekly_total():
 
     # Calculate the weekly total hours by summing the hours in the worksheet
     for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
-        if row[0] is not None and isinstance(row[0], (int, float)):
-            weekly_total_hours += row[0]
+        if row[0] is not None:
+            print("Data Type:", type(row[0]))
+            if isinstance(row[0], (int, float)):
+                weekly_total_hours += row[0]
+            # Add print statement to debug
+            print("Row:", row[0], "Total Hours:", weekly_total_hours)
 
     # Display the weekly total
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
     total_label.config(text=weekly_total_message)
-
 
 # Function to apply header styles to a worksheet
 
