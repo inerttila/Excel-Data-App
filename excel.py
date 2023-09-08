@@ -11,6 +11,21 @@ import tkinter as tk
 from tkinter import simpledialog, Toplevel, ttk
 from tkcalendar import Calendar
 
+
+def display_weekly_total():
+    global worksheet  # Ensure you have this global declaration
+    weekly_total_hours = 0  # Initialize the weekly_total_hours variable
+
+    # Calculate the weekly total hours by summing the hours in the worksheet
+    for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
+        if row[0] is not None and isinstance(row[0], (int, float)):
+            weekly_total_hours += row[0]
+
+    # Display the weekly total
+    weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
+    total_label.config(text=weekly_total_message)
+
+
 # Function to apply header styles to a worksheet
 
 
@@ -290,7 +305,7 @@ icon = tk.PhotoImage(file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\otr.png')
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 400
+window_width = 500
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -358,9 +373,18 @@ for i, category in enumerate(categories):
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky='w')
 
+
 # Create a "Confirm" button for submitting input
 confirm_button = Button(window, text="Confirm", command=confirm_input)
 confirm_button.grid(row=len(categories), column=0, columnspan=2, pady=10)
+
+# Create a "Confirm" button for submitting input
+total_button = Button(window, text="Total", command=display_weekly_total)
+total_button.grid(row=len(categories), column=2, columnspan=1, pady=10)
+
+# Create a label for displaying the weekly total
+total_label = Label(window, text="", font=("Arial", 10))
+total_label.grid(row=len(categories), column=5, columnspan=1, pady=10)
 
 # Start the main event loop for the application window
 window.mainloop()
