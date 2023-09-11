@@ -255,7 +255,7 @@ def reset_option_menu(option_menu, options):
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
-company_options = ['Skaitech', '3DSkai', '-']
+company_options = ['SKAITECH', '3DSKAI', '-']
 service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation',
                    'Security/AI', 'Immersive Technologies', 'Training', 'Research', '-']
 type_of_service_options = ['Software', 'Hardware', 'Other', '-']
