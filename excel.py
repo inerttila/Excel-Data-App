@@ -14,18 +14,17 @@ from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
 
+# Calculate the weekly total hours by summing the hours in the worksheet
+
 
 def display_weekly_total():
-    global worksheet  # Ensure you have this global declaration
-    weekly_total_hours = 0  # Initialize the weekly_total_hours variable
+    global worksheet
+    weekly_total_hours = 0
 
-    # Calculate the weekly total hours by summing the hours in the worksheet
     for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
         if row[0] is not None:
             if isinstance(row[0], (int, float)):
                 weekly_total_hours += row[0]
-            else:
-                print(f"Invalid value in row: {row[0]}")
 
     # Display the weekly total
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
@@ -36,8 +35,6 @@ def display_weekly_total():
 
 
 # Function to apply header styles to a worksheet
-
-
 def apply_header_styles(worksheet, headers):
     header_font = Font(bold=True, color="ffffff")
     header_fill = PatternFill(start_color="061c43",
@@ -205,7 +202,6 @@ def confirm_input():
             if category == 'Notes':
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
-
         # Save data in the original sheet
 
         # Create or get the "2023" sheet and save data there too
@@ -286,10 +282,8 @@ task_options = ['Development', 'Control', 'Research', 'Testing', 'Other', '-']
 input_values = {}
 
 # Get the worksheet where you want to adjust column widths
-# You can change this to your specific worksheet if needed
 worksheet = workbook.active
 
-# Define the desired widths for each column (adjust these values as needed)
 column_widths = {
     'A': 15,  # Date
     'B': 20,  # Service Line
@@ -304,7 +298,7 @@ column_widths = {
 for column, width in column_widths.items():
     worksheet.column_dimensions[column].width = width
 
-    # Save the workbook with adjusted column widths
+# Save the workbook with adjusted column widths
 workbook.save(file_path)
 
 # Add this line to set the horizontal alignment to "right" for the 'F' column (Hours)
