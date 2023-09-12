@@ -10,6 +10,9 @@ import datetime
 import tkinter as tk
 from tkinter import simpledialog, Toplevel, ttk
 from tkcalendar import Calendar
+from openpyxl import load_workbook
+from openpyxl.utils import get_column_letter
+from openpyxl.styles import Font, PatternFill, Alignment
 
 
 def display_weekly_total():
@@ -21,10 +24,16 @@ def display_weekly_total():
         if row[0] is not None:
             if isinstance(row[0], (int, float)):
                 weekly_total_hours += row[0]
+            else:
+                print(f"Invalid value in row: {row[0]}")
 
     # Display the weekly total
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
     total_label.config(text=weekly_total_message)
+
+    # Print the calculated total for debugging
+    print(f"Weekly Total Hours (Debug): {weekly_total_hours}")
+
 
 # Function to apply header styles to a worksheet
 
@@ -38,7 +47,7 @@ def apply_header_styles(worksheet, headers):
         cell = worksheet.cell(row=1, column=col_num, value=header)
         cell.font = header_font
         cell.fill = header_fill
-
+        # Apply right alignment to numeric columns (e.g., 'Hours')
         row_height = 30
         worksheet.row_dimensions[1].height = row_height
 
@@ -70,7 +79,7 @@ def load_or_create_workbook(file_path):
 # Function to apply header styles for categories in a worksheet
 
 
-def apply_header_styles(worksheet, categories):
+def apply_header_styles_with_categories(worksheet, categories):
     header_font = Font(bold=True, color="ffffff")
     header_fill = PatternFill(start_color="061c43",
                               end_color="061c43", fill_type="solid")
@@ -253,6 +262,7 @@ def reset_option_menu(option_menu, options):
 
 # File path and initial data setup
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+workbook = load_workbook(file_path)
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
 company_options = ['SKAITECH', '3DSKAI', '-']
@@ -261,6 +271,32 @@ service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation',
 type_of_service_options = ['Software', 'Hardware', 'Other', '-']
 task_options = ['Development', 'Control', 'Research', 'Testing', 'Other', '-']
 input_values = {}
+
+# Get the worksheet where you want to adjust column widths
+# You can change this to your specific worksheet if needed
+worksheet = workbook.active
+
+# Define the desired widths for each column (adjust these values as needed)
+column_widths = {
+    'A': 15,  # Date
+    'B': 20,  # Service Line
+    'C': 20,  # Type of Service
+    'D': 20,  # Company
+    'E': 20,  # Task
+    'F': 10,  # Hours
+    'G': 50   # Notes
+}
+
+# Set the column widths based on the defined widths
+for column, width in column_widths.items():
+    worksheet.column_dimensions[column].width = width
+
+    # Save the workbook with adjusted column widths
+workbook.save(file_path)
+
+# Add this line to set the horizontal alignment to "right" for the 'F' column (Hours)
+worksheet.column_dimensions['F'].alignment = Alignment(horizontal="right")
+
 
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
