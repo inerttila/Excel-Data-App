@@ -30,9 +30,6 @@ def display_weekly_total():
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
     total_label.config(text=weekly_total_message)
 
-    # Print the calculated total for debugging
-    print(f"Weekly Total Hours (Debug): {weekly_total_hours}")
-
 
 # Function to apply header styles to a worksheet
 def apply_header_styles(worksheet, headers):
