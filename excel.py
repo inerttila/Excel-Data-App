@@ -260,6 +260,19 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
+# Define the path to the Excel file
+file_path = os.path.join(
+    'C:\\Users\\User\\Desktop\\excel-data', 'Timesheet-managementt.xlsx')
+
+# Check if the file exists
+if os.path.isfile(file_path):
+    # The file exists, load it
+    workbook = load_workbook(file_path)
+else:
+    # The file doesn't exist, create it
+    workbook = openpyxl.Workbook()
+    workbook.save(file_path)
+
 # File path and initial data setup
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 workbook = load_workbook(file_path)
@@ -296,7 +309,6 @@ workbook.save(file_path)
 
 # Add this line to set the horizontal alignment to "right" for the 'F' column (Hours)
 worksheet.column_dimensions['F'].alignment = Alignment(horizontal="right")
-
 
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
