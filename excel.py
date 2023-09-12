@@ -261,10 +261,10 @@ file_path = os.path.join(
 if os.path.isfile(file_path):
     # The file exists, load it
     workbook = load_workbook(file_path)
-# else:
-#     # The file doesn't exist, create it
-#     workbook = openpyxl.Workbook()
-#     workbook.save(file_path)
+else:
+    # The file doesn't exist, create it
+    workbook = openpyxl.Workbook()
+    workbook.save(file_path)
 
 # File path and initial data setup
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
