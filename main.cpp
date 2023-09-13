@@ -5,10 +5,10 @@
 
 int main() {
     // Path to your Python script
-    std::string pythonScriptPath = "C:\\Users\\User\\Desktop\\excel-data\\excel.py";
+    const std::string PYTHON_SCRIPT_PATH = "C:\\Users\\User\\Desktop\\excel-data\\excel.py";
 
     // Construct the full command with the script path
-    std::string command = "python " + pythonScriptPath;
+    std::string command = "python " + PYTHON_SCRIPT_PATH;
 
     int pythonVersionCheck = std::system("python --version");
     if (pythonVersionCheck != 0) {
@@ -26,12 +26,11 @@ int main() {
     // You can find the code marked with "ADDED FOR HIDING CONSOLE WINDOW" below.
 
     // Create a STARTUPINFO structure to specify that the process should be created hidden
-    STARTUPINFO si;
-    PROCESS_INFORMATION pi;
-    ZeroMemory(&si, sizeof(si));
-    si.cb = sizeof(si);
+    STARTUPINFO si = { sizeof(STARTUPINFO) }; // Using designated initializer
     si.dwFlags = STARTF_USESHOWWINDOW;
-    si.wShowWindow = SW_HIDE;  // Hide the window
+    si.wShowWindow = SW_HIDE;
+
+    PROCESS_INFORMATION pi = {}; // Using default initialization
 
     // Use DETACHED_PROCESS flag to hide the console window
     int returnCode = CreateProcess(NULL, const_cast<char*>(command.c_str()), NULL, NULL, FALSE, CREATE_NO_WINDOW, NULL, NULL, &si, &pi);
