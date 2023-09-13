@@ -98,7 +98,11 @@ python -m venv venv
 
 source venv/bin/activate
 ```
+Install the required Python packages by running the following command :
 
+```bash
+  pip install -r requirements.txt
+```
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
 
 Execute the Python script to run the application:
