@@ -364,7 +364,7 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 500
+window_width = 550
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -384,28 +384,28 @@ for i, category in enumerate(categories):
         input_values[category] = StringVar(window, company_options[0])
         company_option_menu = OptionMenu(
             window, input_values[category], *company_options)
-        company_option_menu.config(width=15)
+        company_option_menu.config(width=26)
         company_option_menu.category = category
         company_option_menu.grid(row=i, column=1)
     elif category == 'Service Line':
         input_values[category] = StringVar(window, service_options[0])
         service_line_option_menu = OptionMenu(
             window, input_values[category], *service_options)
-        service_line_option_menu.config(width=15)
+        service_line_option_menu.config(width=26)
         service_line_option_menu.category = category
         service_line_option_menu.grid(row=i, column=1)
     elif category == 'Type of Service':
         input_values[category] = StringVar(window, type_of_service_options[0])
         type_of_service_option_menu = OptionMenu(
             window, input_values[category], *type_of_service_options)
-        type_of_service_option_menu.config(width=15)
+        type_of_service_option_menu.config(width=26)
         type_of_service_option_menu.category = category
         type_of_service_option_menu.grid(row=i, column=1)
     elif category == 'Task':
         input_values[category] = StringVar(window, task_options[0])
         task_option_menu = OptionMenu(
             window, input_values[category], *task_options)
-        task_option_menu.config(width=15)
+        task_option_menu.config(width=26)
         task_option_menu.category = category
         task_option_menu.grid(row=i, column=1)
     elif category == 'Date':
@@ -419,12 +419,12 @@ for i, category in enumerate(categories):
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), '%P')
         entry = Entry(
-            window, textvariable=input_values[category], validate="key", validatecommand=vcmd, font=('Arial', 10))
+            window, textvariable=input_values[category], validate="key", validatecommand=vcmd, font=('Arial', 10), width=28)
         entry.grid(row=i, column=1, sticky='w')
     elif category == 'Notes':
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_notes_input), '%P')
-        entry = Text(window, height=4, width=26, font=('Arial', 10))
+        entry = Text(window, height=4, width=28, font=('Arial', 10),)
         entry.grid(row=i, column=1, columnspan=2, sticky='w')
 
     else:
