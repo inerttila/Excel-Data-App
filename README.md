@@ -66,6 +66,20 @@ Install the required Python packages by running the following command in the pro
   pip install -r requirements.txt
 ```
 
+### Customizing the File Path
+
+You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
+
+1. Locate the following line of code in the Python script (`excel.py`):
+
+```python
+  file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+```
+
+When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
+
+By default, the Excel file will be automatically created and saved in the `excel-data` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
+
 ## Usage with Compiling the C++ Part (main.cpp)
 
 To compile the C++ part of the application, follow these steps:
@@ -98,11 +112,13 @@ python -m venv venv
 
 source venv/bin/activate
 ```
+
 Install the required Python packages by running the following command :
 
 ```bash
   pip install -r requirements.txt
 ```
+
 Ensure you have Python installed on your system. If not, install or update it from the Python official website.
 
 Execute the Python script to run the application:
@@ -112,20 +128,6 @@ Execute the Python script to run the application:
 ```
 
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `excel-data` folder within the project directory.
-
-### Customizing the File Path
-
-You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
-
-1. Locate the following line of code in the Python script (`excel.py`):
-
-```python
-  file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
-```
-
-When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
-
-By default, the Excel file will be automatically created and saved in the `excel-data` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
 
 ## Contact
 

@@ -14,24 +14,31 @@ from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
 
+# Function to calculate weekly total hours
+
+
+def calculate_weekly_total_hours(worksheet):
+    weekly_total_hours = 0
+    for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
+        if row[0] is not None:
+            if isinstance(row[0], (int, float, str)):
+                weekly_total_hours += int(row[0])
+    return weekly_total_hours
+
 # Calculate the weekly total hours by summing the hours in the worksheet
 
 
 def display_weekly_total():
     global worksheet
-    weekly_total_hours = 0
-
-    for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
-        if row[0] is not None:
-            if isinstance(row[0], (int, float, str)):
-                weekly_total_hours += int(row[0])
+    weekly_total_hours = calculate_weekly_total_hours(worksheet)
 
     # Display the weekly total
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
     total_label.config(text=weekly_total_message)
 
-
 # Function to apply header styles to a worksheet
+
+
 def apply_header_styles(worksheet, headers):
     header_font = Font(bold=True, color="ffffff")
     header_fill = PatternFill(start_color="061c43",
@@ -200,6 +207,13 @@ def confirm_input():
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
         # Save data in the original sheet
+
+        # Calculate the total hours per week
+        weekly_total_hours = calculate_weekly_total_hours(worksheet)
+
+        # Check if the weekly total hours exceed 40
+        if weekly_total_hours + int(row_data[5]) > 40:
+            raise ValueError("Total weekly hours cannot exceed 40 hours.")
 
         # Create or get the "2023" sheet and save data there too
         sheet_2023 = create_or_get_sheet(workbook, "2023")
