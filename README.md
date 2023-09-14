@@ -76,10 +76,6 @@ You can customize the file path where the Excel file is saved based on your pref
   file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 ```
 
-When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
-
-By default, the Excel file will be automatically created and saved in the `excel-data` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
-
 ## Usage with Compiling the C++ Part (main.cpp)
 
 To compile the C++ part of the application, follow these steps:
@@ -92,7 +88,9 @@ To compile the C++ part of the application, follow these steps:
   g++ main.cpp -o timesheet_app
 ```
 
-Make sure you have the necessary C++ build environment and a compatible C++ compiler installed if you intend to use the C++ part of the project.
+When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
+
+By default, the Excel file will be automatically created and saved in the `excel-data` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
 
 ## Usage
 
