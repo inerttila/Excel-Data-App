@@ -312,9 +312,6 @@ for column, width in column_widths.items():
 # Save the workbook with adjusted column widths
 workbook.save(file_path)
 
-# Add this line to set the horizontal alignment to "right" for the 'F' column (Hours)
-worksheet.column_dimensions['F'].alignment = Alignment(horizontal="right")
-
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
 workbook = load_or_create_workbook(file_path)
