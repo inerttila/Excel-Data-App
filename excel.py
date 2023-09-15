@@ -13,6 +13,7 @@ from tkcalendar import Calendar
 from openpyxl import load_workbook
 from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
+import shutil
 
 # Function to calculate weekly total hours
 
@@ -201,11 +202,19 @@ def confirm_input():
             value = input_values[category].get()
             if category == 'Date' and not value:
                 raise ValueError("Date must be selected.")
-            if category == 'Hours' and not validate_hours_input(value):
-                raise ValueError("Invalid Hours input.")
+            if category == 'Hours':
+                if not value:
+                    messagebox.showerror("Error", "Please write the hours.")
+                    return
+                if not validate_hours_input(value):
+                    messagebox.showerror("Error", "Invalid Hours input.")
+                    return
             if category == 'Notes':
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
+
+        # Calculate the total hours per week
+        weekly_total_hours = calculate_weekly_total_hours(worksheet)
         # Save data in the original sheet
 
         # Calculate the total hours per week
@@ -280,6 +289,27 @@ else:
     workbook = openpyxl.Workbook()
     workbook.save(file_path)
 
+
+# Define the local file path for copying to the server
+local_file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+
+# Server file path
+server_file_path = r'\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx'
+
+# Function to copy the file to the server path
+
+
+def copy_to_server(local_file_path):
+    try:
+        # Copy the Excel file to the server path
+        shutil.copy(local_file_path, server_file_path)
+        messagebox.showinfo(
+            "Success", "Excel file copied to the server successfully.")
+    except Exception as e:
+        messagebox.showerror(
+            "Error", f"Error copying Excel file to the server: {str(e)}")
+
+
 # File path and initial data setup
 file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
 workbook = load_workbook(file_path)
@@ -330,11 +360,13 @@ def delete_sheet(wb, sheet_name):
             sheet = workbook[sheet_name]
             workbook.remove(sheet)
             workbook.save(file_path)
-            print(f"The sheet '{sheet_name}' was deleted successfully.")
+            messagebox.showinfo(
+                "Success", f"The sheet '{sheet_name}' was deleted successfully.")
         else:
-            print(f"The sheet '{sheet_name}' does not exist in the workbook.")
+            messagebox.showinfo(
+                "Info", f"The sheet '{sheet_name}' does not exist in the workbook.")
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
 # Function to create a new sheet with headers and data
 
@@ -347,9 +379,10 @@ def create_sheet_with_headers(headers, rd):
         workbook.save(file_path)
         new_sheet.append(rd)
         workbook.save(file_path)
-        print(f"A new sheet named 'Sheet' with headers has been created.")
+        messagebox.showinfo(
+            "Success", "A new sheet named 'Sheet' with headers has been created.")
     except Exception as e:
-        print(f"An error occurred: {str(e)}")
+        messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
 
 # Create the main application window
@@ -433,6 +466,11 @@ for i, category in enumerate(categories):
 # Create a "Confirm" button for submitting input
 confirm_button = Button(window, text="Confirm", command=confirm_input)
 confirm_button.grid(row=len(categories), column=0, columnspan=2, pady=10)
+
+# Create a "Send File" button for copying the Excel file to the server
+send_file_button = tk.Button(
+    window, text="Send File", command=lambda: copy_to_server(local_file_path))
+send_file_button.grid(row=len(categories), column=1, columnspan=2, pady=10)
 
 # Create a "Confirm" button for submitting input
 total_button = Button(window, text="Total", command=display_weekly_total)
