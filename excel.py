@@ -14,9 +14,8 @@ from openpyxl.utils import get_column_letter
 from openpyxl.styles import Font, PatternFill, Alignment
 import shutil
 
+
 # Function to calculate weekly total hours
-
-
 def calculate_weekly_total_hours(worksheet):
     weekly_total_hours = 0
     for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
@@ -25,9 +24,8 @@ def calculate_weekly_total_hours(worksheet):
                 weekly_total_hours += int(row[0])
     return weekly_total_hours
 
+
 # Calculate the weekly total hours by summing the hours in the worksheet
-
-
 def display_weekly_total():
     global worksheet
     weekly_total_hours = calculate_weekly_total_hours(worksheet)
@@ -36,9 +34,8 @@ def display_weekly_total():
     weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
     total_label.config(text=weekly_total_message)
 
+
 # Function to apply header styles to a worksheet
-
-
 def apply_header_styles(worksheet, headers):
     header_font = Font(bold=True, color="ffffff")
     header_fill = PatternFill(start_color="061c43",
@@ -52,34 +49,30 @@ def apply_header_styles(worksheet, headers):
         row_height = 30
         worksheet.row_dimensions[1].height = row_height
 
+
 # Function to create or get a sheet from a workbook
-
-
 def create_or_get_sheet(workbook, sheet_name):
     try:
         return workbook[sheet_name]
     except KeyError:
         return workbook.create_sheet(sheet_name)
 
+
 # Function to create a directory if it doesn't exist
-
-
 def create_directory_if_not_exists(file_path):
     directory = os.path.dirname(file_path)
     os.makedirs(directory, exist_ok=True)
 
+
 # Function to load or create a workbook
-
-
 def load_or_create_workbook(file_path):
     try:
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
         return openpyxl.Workbook()
 
+
 # Function to handle user input for categories with options
-
-
 def select_option(category, options):
     try:
         value = simpledialog.askstring("Data Input", f"Enter {category}:")
@@ -90,9 +83,8 @@ def select_option(category, options):
     except ValueError as e:
         messagebox.showerror("Error", str(e))
 
+
 # Function to handle selection of a date
-
-
 def select_date():
     if hasattr(select_date, 'calendar_open') and select_date.calendar_open:
         return
@@ -147,23 +139,20 @@ def select_date():
     # Start the main event loop for the pop-up window
     top.mainloop()
 
+
 # Function to validate hours input
-
-
 def validate_hours_input(value):
     if value and not value.replace('.', '').isdigit():
         return False
     return True
 
+
 # Function to validate notes input
-
-
 def validate_notes_input(value):
     return True
 
+
 # Function to check if the last entry in the worksheet is on a Fiday
-
-
 def is_last_entry_on_sunday(worksheet):
     if worksheet.max_row <= 1:
         return False  # No data in the worksheet
@@ -251,9 +240,8 @@ def confirm_input():
     except Exception as e:
         messagebox.showerror("Error", str(e))
 
+
 # Function to reset an option menu with new options
-
-
 def reset_option_menu(option_menu, options):
     menu = option_menu['menu']
     menu.delete(0, 'end')
@@ -283,9 +271,8 @@ local_file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.x
 # Server file path
 server_file_path = r'\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx'
 
+
 # Function to copy the file to the server path
-
-
 def copy_to_server(local_file_path):
     try:
         # Copy the Excel file to the server path
@@ -316,9 +303,8 @@ worksheet = workbook['Sheet']
 # Apply header styles to the worksheet
 apply_header_styles(worksheet, categories)
 
+
 # Function to delete a sheet from the workbook
-
-
 def delete_sheet(wb, sheet_name):
     try:
         global workbook
@@ -326,16 +312,8 @@ def delete_sheet(wb, sheet_name):
             sheet = workbook[sheet_name]
             workbook.remove(sheet)
             workbook.save(file_path)
-            if sheet_name != 'Sheet':  # Check if it's not the default sheet
-                messagebox.showinfo(
-                    "Success", f"The sheet '{sheet_name}' was deleted successfully.")
-        else:
-            messagebox.showinfo(
-                "Info", f"The sheet '{sheet_name}' does not exist in the workbook.")
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
-
-# Function to create a new sheet with headers and data
 
 
 # Function to create a new sheet with headers and data, and adjust column widths
@@ -359,7 +337,6 @@ def create_sheet_with_headers(headers, rd):
             new_sheet.column_dimensions[column].width = width
 
         # workbook.save(file_path)
-
         new_sheet.append(rd)
 
      # Save the workbook after appending data
