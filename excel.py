@@ -1,7 +1,6 @@
 import os
 import openpyxl
 from tkinter import Tk, simpledialog, Label, StringVar, Button, OptionMenu, Entry, Text
-from openpyxl.styles import Font, PatternFill
 from tkcalendar import Calendar, DateEntry
 import tkinter.messagebox as messagebox
 from tkinter import Toplevel
@@ -77,22 +76,6 @@ def load_or_create_workbook(file_path):
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
         return openpyxl.Workbook()
-
-# Function to apply header styles for categories in a worksheet
-
-
-def apply_header_styles_with_categories(worksheet, categories):
-    header_font = Font(bold=True, color="ffffff")
-    header_fill = PatternFill(start_color="061c43",
-                              end_color="061c43", fill_type="solid")
-
-    for col_num, category in enumerate(categories, start=1):
-        cell = worksheet.cell(row=1, column=col_num, value=category)
-        cell.font = header_font
-        cell.fill = header_fill
-
-        row_height = 30
-        worksheet.row_dimensions[1].height = row_height
 
 # Function to handle user input for categories with options
 
@@ -178,7 +161,7 @@ def validate_hours_input(value):
 def validate_notes_input(value):
     return True
 
-# Function to check if the last entry in the worksheet is on a Sunday
+# Function to check if the last entry in the worksheet is on a Fiday
 
 
 def is_last_entry_on_sunday(worksheet):
@@ -215,14 +198,18 @@ def confirm_input():
 
         # Calculate the total hours per week
         weekly_total_hours = calculate_weekly_total_hours(worksheet)
-        # Save data in the original sheet
 
-        # Calculate the total hours per week
-        weekly_total_hours = calculate_weekly_total_hours(worksheet)
-
-        # Check if the weekly total hours exceed 40
+        # Check if the weekly total hours will exceed 40 after adding the new entry
         if weekly_total_hours + int(row_data[5]) > 40:
-            raise ValueError("Total weekly hours cannot exceed 40 hours.")
+            if not is_last_entry_on_sunday(worksheet):
+                raise ValueError("Total weekly hours cannot exceed 40 hours.")
+            else:
+                # Add an empty row before appending new data on Monday
+                sheet_name_to_delete = 'Sheet'
+                delete_sheet("s", sheet_name_to_delete)
+                header_row = ['Date', 'Service Line', 'Type of Service',
+                              'Company', 'Task', 'Hours', 'Notes']
+                create_sheet_with_headers(header_row, row_data)
 
         # Create or get the "2023" sheet and save data there too
         sheet_2023 = create_or_get_sheet(workbook, "2023")
@@ -311,8 +298,7 @@ def copy_to_server(local_file_path):
 
 
 # File path and initial data setup
-file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
-workbook = load_workbook(file_path)
+workbook = load_workbook(local_file_path)
 categories = ['Date', 'Service Line', 'Type of Service',
               'Company', 'Task', 'Hours', 'Notes']
 company_options = ['SKAITECH', '3DSKAI', '-']
@@ -321,26 +307,6 @@ service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation',
 type_of_service_options = ['Software', 'Hardware', 'Other', '-']
 task_options = ['Development', 'Control', 'Research', 'Testing', 'Other', '-']
 input_values = {}
-
-# Get the worksheet where you want to adjust column widths
-worksheet = workbook.active
-
-column_widths = {
-    'A': 15,  # Date
-    'B': 20,  # Service Line
-    'C': 20,  # Type of Service
-    'D': 20,  # Company
-    'E': 20,  # Task
-    'F': 10,  # Hours
-    'G': 50   # Notes
-}
-
-# Set the column widths based on the defined widths
-for column, width in column_widths.items():
-    worksheet.column_dimensions[column].width = width
-
-# Save the workbook with adjusted column widths
-workbook.save(file_path)
 
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
@@ -360,8 +326,9 @@ def delete_sheet(wb, sheet_name):
             sheet = workbook[sheet_name]
             workbook.remove(sheet)
             workbook.save(file_path)
-            messagebox.showinfo(
-                "Success", f"The sheet '{sheet_name}' was deleted successfully.")
+            if sheet_name != 'Sheet':  # Check if it's not the default sheet
+                messagebox.showinfo(
+                    "Success", f"The sheet '{sheet_name}' was deleted successfully.")
         else:
             messagebox.showinfo(
                 "Info", f"The sheet '{sheet_name}' does not exist in the workbook.")
@@ -371,18 +338,34 @@ def delete_sheet(wb, sheet_name):
 # Function to create a new sheet with headers and data
 
 
+# Function to create a new sheet with headers and data, and adjust column widths
 def create_sheet_with_headers(headers, rd):
     try:
         global workbook
         new_sheet = workbook.create_sheet(title="Sheet", index=0)
         apply_header_styles(new_sheet, headers)
-        workbook.save(file_path)
+
+        # Set the column widths for the new sheet
+        column_widths = {
+            'A': 15,  # Date
+            'B': 20,  # Service Line
+            'C': 20,  # Type of Service
+            'D': 20,  # Company
+            'E': 20,  # Task
+            'F': 10,  # Hours
+            'G': 50   # Notes
+        }
+        for column, width in column_widths.items():
+            new_sheet.column_dimensions[column].width = width
+
+        # workbook.save(file_path)
+
         new_sheet.append(rd)
+
+     # Save the workbook after appending data
         workbook.save(file_path)
-        messagebox.showinfo(
-            "Success", "A new sheet named 'Sheet' with headers has been created.")
     except Exception as e:
-        messagebox.showerror("Error", f"An error occurred: {str(e)}")
+        pass
 
 
 # Create the main application window
