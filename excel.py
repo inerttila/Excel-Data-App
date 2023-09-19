@@ -1,24 +1,24 @@
-import os
-import openpyxl
-from tkinter import Tk, simpledialog, Label, StringVar, Button, OptionMenu, Entry, Text
-from tkcalendar import Calendar, DateEntry
-import tkinter.messagebox as messagebox
-from tkinter import Toplevel
-from openpyxl.styles import Font, PatternFill
 import datetime
-import tkinter as tk
-from tkinter import simpledialog, Toplevel, ttk
-from tkcalendar import Calendar
-from openpyxl import load_workbook
-from openpyxl.utils import get_column_letter
-from openpyxl.styles import Font, PatternFill, Alignment
+import os
 import shutil
+import tkinter as tk
+import tkinter.messagebox as messagebox
+from tkinter import (Button, Entry, Label, OptionMenu, StringVar, Text, Tk,
+                     Toplevel, simpledialog, ttk)
+
+import openpyxl
+from openpyxl import load_workbook
+from openpyxl.styles import Alignment, Font, PatternFill
+from openpyxl.utils import get_column_letter
+from tkcalendar import Calendar, DateEntry
 
 
 # Function to calculate weekly total hours
 def calculate_weekly_total_hours(worksheet):
     weekly_total_hours = 0
-    for row in worksheet.iter_rows(min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True):
+    for row in worksheet.iter_rows(
+        min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
+    ):
         if row[0] is not None:
             if isinstance(row[0], (int, float, str)):
                 weekly_total_hours += int(row[0])
@@ -38,8 +38,9 @@ def display_weekly_total():
 # Function to apply header styles to a worksheet
 def apply_header_styles(worksheet, headers):
     header_font = Font(bold=True, color="ffffff")
-    header_fill = PatternFill(start_color="061c43",
-                              end_color="061c43", fill_type="solid")
+    header_fill = PatternFill(
+        start_color="061c43", end_color="061c43", fill_type="solid"
+    )
 
     for col_num, header in enumerate(headers, start=1):
         cell = worksheet.cell(row=1, column=col_num, value=header)
@@ -86,47 +87,55 @@ def select_option(category, options):
 
 # Function to handle selection of a date
 def select_date():
-    if hasattr(select_date, 'calendar_open') and select_date.calendar_open:
+    if hasattr(select_date, "calendar_open") and select_date.calendar_open:
         return
 
     select_date.calendar_open = True
 
     def on_date_selected():
         selected_date = cal.selection_get()
-        input_values['Date'].set(selected_date.strftime("%Y-%m-%d"))
-        date_label.config(text=input_values['Date'].get())
+        input_values["Date"].set(selected_date.strftime("%Y-%m-%d"))
+        date_label.config(text=input_values["Date"].get())
         top.destroy()
         select_date.calendar_open = False
 
     # Create a pop-up window for date selection
     top = Toplevel()
     top.title("Select Date")
-    top.configure(background='#333333')
+    top.configure(background="#333333")
 
     # Set the icon for the pop-up window
     icon = tk.PhotoImage(
-        file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png')
+        file="C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png")
     top.iconphoto(False, icon)
 
     # Configure style for the calendar and buttons
     style = ttk.Style(top)
-    style.configure('Calendar.Treeview', background='#333333',
-                    foreground='white', fieldbackground='#333333')
+    style.configure(
+        "Calendar.Treeview",
+        background="#333333",
+        foreground="white",
+        fieldbackground="#333333",
+    )
 
-    style.configure('TButton', foreground='black',
-                    background='#061c43', font=('Arial', 9, 'bold'))
+    style.configure(
+        "TButton", foreground="black", background="#061c43", font=("Arial", 9, "bold")
+    )
     # Create a calendar widget for date selection
     calendar_position_row = 1
     calendar_position_column = 1
     cal = Calendar(top)
-    cal.grid(row=calendar_position_row,
-             column=calendar_position_column, padx=10, pady=10)
+    cal.grid(
+        row=calendar_position_row, column=calendar_position_column, padx=10, pady=10
+    )
 
     # Create a "Confirm" button for date selection
     confirm_button = ttk.Button(
-        top, text="Confirm", command=on_date_selected, style='TButton')
-    confirm_button.grid(row=calendar_position_row + 1,
-                        column=calendar_position_column, padx=10, pady=10)
+        top, text="Confirm", command=on_date_selected, style="TButton"
+    )
+    confirm_button.grid(
+        row=calendar_position_row + 1, column=calendar_position_column, padx=10, pady=10
+    )
 
     # Function to close the pop-up window
     def close_window():
@@ -142,7 +151,7 @@ def select_date():
 
 # Function to validate hours input
 def validate_hours_input(value):
-    if value and not value.replace('.', '').isdigit():
+    if value and not value.replace(".", "").isdigit():
         return False
     return True
 
@@ -172,16 +181,16 @@ def confirm_input():
         row_data = []
         for category in categories:
             value = input_values[category].get()
-            if category == 'Date' and not value:
+            if category == "Date" and not value:
                 raise ValueError("Date must be selected.")
-            if category == 'Hours':
+            if category == "Hours":
                 if not value:
                     messagebox.showerror("Error", "Please write the hours.")
                     return
                 if not validate_hours_input(value):
                     messagebox.showerror("Error", "Invalid Hours input.")
                     return
-            if category == 'Notes':
+            if category == "Notes":
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
 
@@ -194,23 +203,37 @@ def confirm_input():
                 raise ValueError("Total weekly hours cannot exceed 40 hours.")
             else:
                 # Add an empty row before appending new data on Monday
-                sheet_name_to_delete = 'Sheet'
+                sheet_name_to_delete = "Sheet"
                 delete_sheet("s", sheet_name_to_delete)
-                header_row = ['Date', 'Service Line', 'Type of Service',
-                              'Company', 'Task', 'Hours', 'Notes']
+                header_row = [
+                    "Date",
+                    "Service Line",
+                    "Type of Service",
+                    "Company",
+                    "Task",
+                    "Hours",
+                    "Notes",
+                ]
                 create_sheet_with_headers(header_row, row_data)
 
         # Create or get the "2023" sheet and save data there too
         sheet_2023 = create_or_get_sheet(workbook, "2023")
         today = datetime.date.today()
-        is_monday = (today.weekday() == 0)
+        is_monday = today.weekday() == 0
         # Check if the last entry in the original sheet is on Sunday
         if is_last_entry_on_sunday(worksheet) and is_monday:
             # Add an empty row before appending new data on Monday
-            sheet_name_to_delete = 'Sheet'
+            sheet_name_to_delete = "Sheet"
             delete_sheet("s", sheet_name_to_delete)
-            header_row = ['Date', 'Service Line', 'Type of Service',
-                          'Company', 'Task', 'Hours', 'Notes']
+            header_row = [
+                "Date",
+                "Service Line",
+                "Type of Service",
+                "Company",
+                "Task",
+                "Hours",
+                "Notes",
+            ]
             create_sheet_with_headers(header_row, row_data)
             sheet_2023.append([])
 
@@ -220,19 +243,19 @@ def confirm_input():
 
         # Reset input values and user interface elements
         for category in categories:
-            input_values[category].set('')
+            input_values[category].set("")
 
-            if category == 'Notes':
+            if category == "Notes":
                 entry.delete(1.0, "end")
 
-            if category == 'Company':
+            if category == "Company":
                 reset_option_menu(company_option_menu, company_options)
-            elif category == 'Service Line':
+            elif category == "Service Line":
                 reset_option_menu(service_line_option_menu, service_options)
-            elif category == 'Type of Service':
+            elif category == "Type of Service":
                 reset_option_menu(type_of_service_option_menu,
                                   type_of_service_options)
-            elif category == 'Task':
+            elif category == "Task":
                 reset_option_menu(task_option_menu, task_options)
 
         messagebox.showinfo("Success", "Data saved successfully.")
@@ -243,17 +266,21 @@ def confirm_input():
 
 # Function to reset an option menu with new options
 def reset_option_menu(option_menu, options):
-    menu = option_menu['menu']
-    menu.delete(0, 'end')
+    menu = option_menu["menu"]
+    menu.delete(0, "end")
     for option in options:
         menu.add_command(
-            label=option, command=lambda value=option: input_values[option_menu.category].set(value))
+            label=option,
+            command=lambda value=option: input_values[option_menu.category].set(
+                value),
+        )
     input_values[option_menu.category].set(options[0])
 
 
 # Define the path to the Excel file
 file_path = os.path.join(
-    'C:\\Users\\User\\Desktop\\excel-data', 'Timesheet-managementt.xlsx')
+    "C:\\Users\\User\\Desktop\\excel-data", "Timesheet-managementt.xlsx"
+)
 
 # Check if the file exists
 if os.path.isfile(file_path):
@@ -266,10 +293,10 @@ else:
 
 
 # Define the local file path for copying to the server
-local_file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+local_file_path = "C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx"
 
 # Server file path
-server_file_path = r'\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx'
+server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
 
 
 # Function to copy the file to the server path
@@ -281,24 +308,40 @@ def copy_to_server(local_file_path):
             "Success", "Excel file copied to the server successfully.")
     except Exception as e:
         messagebox.showerror(
-            "Error", f"Error copying Excel file to the server: {str(e)}")
+            "Error", f"Error copying Excel file to the server: {str(e)}"
+        )
 
 
 # File path and initial data setup
 workbook = load_workbook(local_file_path)
-categories = ['Date', 'Service Line', 'Type of Service',
-              'Company', 'Task', 'Hours', 'Notes']
-company_options = ['SKAITECH', '3DSKAI', '-']
-service_options = ['Develop', 'Drones/Robotics', 'IoT/Automation',
-                   'Security/AI', 'Immersive Technologies', 'Training', 'Research', '-']
-type_of_service_options = ['Software', 'Hardware', 'Other', '-']
-task_options = ['Development', 'Control', 'Research', 'Testing', 'Other', '-']
+categories = [
+    "Date",
+    "Service Line",
+    "Type of Service",
+    "Company",
+    "Task",
+    "Hours",
+    "Notes",
+]
+company_options = ["SKAITECH", "3DSKAI", "-"]
+service_options = [
+    "Develop",
+    "Drones/Robotics",
+    "IoT/Automation",
+    "Security/AI",
+    "Immersive Technologies",
+    "Training",
+    "Research",
+    "-",
+]
+type_of_service_options = ["Software", "Hardware", "Other", "-"]
+task_options = ["Development", "Control", "Research", "Testing", "Other", "-"]
 input_values = {}
 
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
 workbook = load_or_create_workbook(file_path)
-worksheet = workbook['Sheet']
+worksheet = workbook["Sheet"]
 
 # Apply header styles to the worksheet
 apply_header_styles(worksheet, categories)
@@ -325,13 +368,13 @@ def create_sheet_with_headers(headers, rd):
 
         # Set the column widths for the new sheet
         column_widths = {
-            'A': 15,  # Date
-            'B': 20,  # Service Line
-            'C': 20,  # Type of Service
-            'D': 20,  # Company
-            'E': 20,  # Task
-            'F': 10,  # Hours
-            'G': 50   # Notes
+            "A": 15,  # Date
+            "B": 20,  # Service Line
+            "C": 20,  # Type of Service
+            "D": 20,  # Company
+            "E": 20,  # Task
+            "F": 10,  # Hours
+            "G": 50,  # Notes
         }
         for column, width in column_widths.items():
             new_sheet.column_dimensions[column].width = width
@@ -339,7 +382,7 @@ def create_sheet_with_headers(headers, rd):
         # workbook.save(file_path)
         new_sheet.append(rd)
 
-     # Save the workbook after appending data
+        # Save the workbook after appending data
         workbook.save(file_path)
     except Exception as e:
         pass
@@ -348,9 +391,9 @@ def create_sheet_with_headers(headers, rd):
 # Create the main application window
 window = Tk()
 window.title("Timesheet Application")
-window.configure(background='#333333')
+window.configure(background="#333333")
 icon = tk.PhotoImage(
-    file='C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png')
+    file="C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png")
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
@@ -366,61 +409,75 @@ window.geometry(
 # Create labels and input fields for each category
 for i, category in enumerate(categories):
     label = Label(window, text=category,
-                  background='#333333', foreground='white')
+                  background="#333333", foreground="white")
     label.grid(row=i, column=0)
 
     # Create input fields based on the category
-    if category == 'Company':
+    if category == "Company":
         input_values[category] = StringVar(window, company_options[0])
         company_option_menu = OptionMenu(
-            window, input_values[category], *company_options)
+            window, input_values[category], *company_options
+        )
         company_option_menu.config(width=26)
         company_option_menu.category = category
         company_option_menu.grid(row=i, column=1)
-    elif category == 'Service Line':
+    elif category == "Service Line":
         input_values[category] = StringVar(window, service_options[0])
         service_line_option_menu = OptionMenu(
-            window, input_values[category], *service_options)
+            window, input_values[category], *service_options
+        )
         service_line_option_menu.config(width=26)
         service_line_option_menu.category = category
         service_line_option_menu.grid(row=i, column=1)
-    elif category == 'Type of Service':
+    elif category == "Type of Service":
         input_values[category] = StringVar(window, type_of_service_options[0])
         type_of_service_option_menu = OptionMenu(
-            window, input_values[category], *type_of_service_options)
+            window, input_values[category], *type_of_service_options
+        )
         type_of_service_option_menu.config(width=26)
         type_of_service_option_menu.category = category
         type_of_service_option_menu.grid(row=i, column=1)
-    elif category == 'Task':
+    elif category == "Task":
         input_values[category] = StringVar(window, task_options[0])
         task_option_menu = OptionMenu(
             window, input_values[category], *task_options)
         task_option_menu.config(width=26)
         task_option_menu.category = category
         task_option_menu.grid(row=i, column=1)
-    elif category == 'Date':
+    elif category == "Date":
         input_values[category] = StringVar(window)
         select_date_button = Button(
             window, text="Select Date", command=select_date)
         select_date_button.grid(row=i, column=1)
         date_label = Label(window, textvariable=input_values[category])
         date_label.grid(row=i, column=2)
-    elif category == 'Hours':
+    elif category == "Hours":
         input_values[category] = StringVar(window)
-        vcmd = (window.register(validate_hours_input), '%P')
+        vcmd = (window.register(validate_hours_input), "%P")
         entry = Entry(
-            window, textvariable=input_values[category], validate="key", validatecommand=vcmd, font=('Arial', 10), width=28)
-        entry.grid(row=i, column=1, sticky='w')
-    elif category == 'Notes':
+            window,
+            textvariable=input_values[category],
+            validate="key",
+            validatecommand=vcmd,
+            font=("Arial", 10),
+            width=28,
+        )
+        entry.grid(row=i, column=1, sticky="w")
+    elif category == "Notes":
         input_values[category] = StringVar(window)
-        vcmd = (window.register(validate_notes_input), '%P')
-        entry = Text(window, height=4, width=28, font=('Arial', 10),)
-        entry.grid(row=i, column=1, columnspan=2, sticky='w')
+        vcmd = (window.register(validate_notes_input), "%P")
+        entry = Text(
+            window,
+            height=4,
+            width=28,
+            font=("Arial", 10),
+        )
+        entry.grid(row=i, column=1, columnspan=2, sticky="w")
 
     else:
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
-        entry.grid(row=i, column=1, sticky='w')
+        entry.grid(row=i, column=1, sticky="w")
 
 
 # Create a "Confirm" button for submitting input
@@ -429,7 +486,8 @@ confirm_button.grid(row=len(categories), column=0, columnspan=2, pady=10)
 
 # Create a "Send File" button for copying the Excel file to the server
 send_file_button = tk.Button(
-    window, text="Send File", command=lambda: copy_to_server(local_file_path))
+    window, text="Send File", command=lambda: copy_to_server(local_file_path)
+)
 send_file_button.grid(row=len(categories), column=1, columnspan=2, pady=10)
 
 # Create a "Confirm" button for submitting input
