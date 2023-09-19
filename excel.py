@@ -347,6 +347,14 @@ worksheet = workbook["Sheet"]
 apply_header_styles(worksheet, categories)
 
 
+# Open the Excel file using the default program
+def open_excel_file():
+    try:
+        os.startfile(file_path)
+    except Exception as e:
+        messagebox.showerror("Error", f"Error opening Excel file: {str(e)}")
+
+
 # Function to delete a sheet from the workbook
 def delete_sheet(wb, sheet_name):
     try:
@@ -397,8 +405,8 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 550
-window_height = 300
+window_width = 500
+window_height = 350
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 x_coordinate = (screen_width - window_width) // 2
@@ -490,13 +498,17 @@ send_file_button = tk.Button(
 )
 send_file_button.grid(row=len(categories), column=1, columnspan=2, pady=10)
 
-# Create a "Confirm" button for submitting input
-total_button = Button(window, text="Total", command=display_weekly_total)
-total_button.grid(row=len(categories), column=2, columnspan=1, pady=10)
+# Create a "Total" button for submitting input with the same style as "Open File" button
+total_button = ttk.Button(window, text="Total", command=display_weekly_total)
+total_button.grid(row=len(categories) + 1, column=1, columnspan=2, pady=10)
 
 # Create a label for displaying the weekly total
 total_label = Label(window, text="", font=("Arial", 10))
-total_label.grid(row=len(categories), column=5, columnspan=1, pady=10)
+total_label.grid(row=len(categories) + 1, column=2, columnspan=2, pady=10)
+
+# Create a "Open File" button for opening the Excel file
+open_file_button = Button(window, text="Open File", command=open_excel_file)
+open_file_button.grid(row=len(categories) + 1, column=0, columnspan=2, pady=10)
 
 # Start the main event loop for the application window
 window.mainloop()
