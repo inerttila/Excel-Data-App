@@ -13,15 +13,33 @@ from openpyxl.utils import get_column_letter
 from tkcalendar import Calendar, DateEntry
 
 
+import datetime
+
 # Function to calculate weekly total hours
+
+
 def calculate_weekly_total_hours(worksheet):
     weekly_total_hours = 0
-    for row in worksheet.iter_rows(
-        min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
-    ):
-        if row[0] is not None:
-            if isinstance(row[0], (int, float, str)):
-                weekly_total_hours += int(row[0])
+    today = datetime.date.today()
+
+    # Check if today is Monday (weekday() returns 0 for Monday)
+    if today.weekday() == 0:
+        # If it's Monday, only calculate hours for the current week
+        for row in worksheet.iter_rows(
+            min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
+        ):
+            if row[0] is not None:
+                if isinstance(row[0], (int, float, str)):
+                    weekly_total_hours += int(row[0])
+    else:
+        # For other days, calculate the total as before
+        for row in worksheet.iter_rows(
+            min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
+        ):
+            if row[0] is not None:
+                if isinstance(row[0], (int, float, str)):
+                    weekly_total_hours += int(row[0])
+
     return weekly_total_hours
 
 
@@ -65,12 +83,35 @@ def create_directory_if_not_exists(file_path):
     os.makedirs(directory, exist_ok=True)
 
 
-# Function to load or create a workbook
+# Create a new workbook if it doesn't exist
 def load_or_create_workbook(file_path):
     try:
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
-        return openpyxl.Workbook()
+        # Create a new workbook and apply styles
+        workbook = openpyxl.Workbook()
+
+        # Set the column widths for the new sheet
+        column_widths = {
+            "A": 15,  # Date
+            "B": 20,  # Service Line
+            "C": 20,  # Type of Service
+            "D": 20,  # Company
+            "E": 20,  # Task
+            "F": 10,  # Hours
+            "G": 50,  # Notes
+        }
+
+        # Create the "Sheet" sheet
+        worksheet = workbook.active
+        worksheet.title = "Sheet"
+        for column, width in column_widths.items():
+            worksheet.column_dimensions[column].width = width
+
+        # Save the workbook
+        workbook.save(file_path)
+
+        return workbook
 
 
 # Function to handle user input for categories with options
@@ -202,19 +243,30 @@ def confirm_input():
             if not is_last_entry_on_sunday(worksheet):
                 raise ValueError("Total weekly hours cannot exceed 40 hours.")
             else:
-                # Add an empty row before appending new data on Monday
-                sheet_name_to_delete = "Sheet"
-                delete_sheet("s", sheet_name_to_delete)
-                header_row = [
-                    "Date",
-                    "Service Line",
-                    "Type of Service",
-                    "Company",
-                    "Task",
-                    "Hours",
-                    "Notes",
-                ]
-                create_sheet_with_headers(header_row, row_data)
+                # Prompt the user for confirmation
+                user_choice = messagebox.askyesno(
+                    "Weekly Hours Exceeded",
+                    "Adding this entry will exceed 40 weekly hours. Do you want to continue?",
+                )
+                if user_choice:
+                    # User chose to continue, add an empty row before appending new data on Monday
+                    sheet_name_to_delete = "Sheet"
+                    delete_sheet("s", sheet_name_to_delete)
+                    header_row = [
+                        "Date",
+                        "Service Line",
+                        "Type of Service",
+                        "Company",
+                        "Task",
+                        "Hours",
+                        "Notes",
+                    ]
+                    create_sheet_with_headers(header_row, row_data)
+                else:
+                    # User chose not to continue, clear the input fields
+                    for category in categories:
+                        input_values[category].set("")
+                    return  # Exit the function without saving
 
         # Create or get the "2023" sheet and save data there too
         sheet_2023 = create_or_get_sheet(workbook, "2023")
