@@ -534,7 +534,6 @@ for i, category in enumerate(categories):
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky="w")
-
 # Calculate the maximum width of "Confirm," "Send File," "Open File," and "Total" buttons
 max_button_width = max(len("Confirm"), len("Send File"),
                        len("Open File"), len("Total"))
@@ -542,32 +541,34 @@ max_button_width = max(len("Confirm"), len("Send File"),
 # Create a "Confirm" button for submitting input with the same style as "Send File" button
 confirm_button = tk.Button(window, text="Confirm",
                            command=confirm_input, width=max_button_width)
-confirm_button.grid(row=len(categories) - 3, column=3,
+confirm_button.grid(row=len(categories) - 5, column=3,
                     padx=(0, 10), pady=1, sticky="e")
 
 # Create a "Send File" button for copying the Excel file to the server with the same style
 send_file_button = tk.Button(
     window, text="Send File", command=lambda: copy_to_server(local_file_path), width=max_button_width, pady=1
 )
-send_file_button.grid(row=len(categories) - 2, column=3,
+send_file_button.grid(row=len(categories) - 4, column=3,
                       padx=(0, 10), pady=1, sticky="e")
 
 # Create an "Open File" button for opening the Excel file with the same style as "Confirm" button
 open_file_button = tk.Button(
     window, text="Open File", command=open_excel_file, width=max_button_width, pady=1)
-open_file_button.grid(row=len(categories) - 1, column=3,
-                      padx=(0, 10), pady=(5, 0), sticky="e")
+open_file_button.grid(row=len(categories) - 3, column=3,
+                      padx=(0, 10), pady=1, sticky="e")
 
 # Create a "Total" button for displaying weekly total with the same style as other buttons
 total_button = tk.Button(
     window, text="Total", command=display_weekly_total, width=max_button_width, pady=1)
-total_button.grid(row=len(categories), column=3,
-                  padx=(0, 10), pady=(0, 5), sticky="e")
+total_button.grid(row=len(categories) - 2, column=3,
+                  padx=(0, 10), pady=1, sticky="e")
 
 
 # Create a label for displaying the weekly total
 total_label = Label(window, text="", font=("Arial", 10))
-total_label.grid(row=len(categories), column=4, padx=10, pady=1, sticky="e")
+total_label.grid(row=len(categories) - 2, column=4,
+                 padx=10, pady=1, sticky="e")
+
 
 # Start the main event loop for the application window
 window.mainloop()
