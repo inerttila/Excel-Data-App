@@ -502,9 +502,6 @@ for i, category in enumerate(categories):
         task_option_menu.grid(row=i, column=1)
     elif category == "Date":
         input_values[category] = StringVar(window)
-        select_date_button = Button(
-            window, text="Select Date", command=select_date)
-        select_date_button.grid(row=i, column=1)
         date_label = Label(window, textvariable=input_values[category])
         date_label.grid(row=i, column=2)
     elif category == "Hours":
@@ -529,11 +526,17 @@ for i, category in enumerate(categories):
             font=("Arial", 10),
         )
         entry.grid(row=i, column=1, columnspan=2, sticky="w")
-
     else:
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky="w")
+
+# Create a "Select Date" button for date selection
+select_date_button = Button(
+    window, text="Select Date", command=select_date)
+select_date_button.grid(row=len(categories) - 6, column=3,
+                        padx=(0, 10), pady=1, sticky="e")
+
 # Calculate the maximum width of "Confirm," "Send File," "Open File," and "Total" buttons
 max_button_width = max(len("Confirm"), len("Send File"),
                        len("Open File"), len("Total"))
