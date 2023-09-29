@@ -13,11 +13,7 @@ from openpyxl.utils import get_column_letter
 from tkcalendar import Calendar, DateEntry
 
 
-import datetime
-
 # Function to calculate weekly total hours
-
-
 def calculate_weekly_total_hours(worksheet):
     weekly_total_hours = 0
     today = datetime.date.today()
@@ -457,8 +453,8 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 500
-window_height = 350
+window_width = 600
+window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 x_coordinate = (screen_width - window_width) // 2
@@ -539,28 +535,39 @@ for i, category in enumerate(categories):
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky="w")
 
+# Calculate the maximum width of "Confirm," "Send File," "Open File," and "Total" buttons
+max_button_width = max(len("Confirm"), len("Send File"),
+                       len("Open File"), len("Total"))
 
-# Create a "Confirm" button for submitting input
-confirm_button = Button(window, text="Confirm", command=confirm_input)
-confirm_button.grid(row=len(categories), column=0, columnspan=2, pady=10)
+# Create a "Confirm" button for submitting input with the same style as "Send File" button
+confirm_button = tk.Button(window, text="Confirm",
+                           command=confirm_input, width=max_button_width)
+confirm_button.grid(row=len(categories) - 3, column=3,
+                    padx=(0, 10), pady=1, sticky="e")
 
-# Create a "Send File" button for copying the Excel file to the server
+# Create a "Send File" button for copying the Excel file to the server with the same style
 send_file_button = tk.Button(
-    window, text="Send File", command=lambda: copy_to_server(local_file_path)
+    window, text="Send File", command=lambda: copy_to_server(local_file_path), width=max_button_width, pady=1
 )
-send_file_button.grid(row=len(categories), column=1, columnspan=2, pady=10)
+send_file_button.grid(row=len(categories) - 2, column=3,
+                      padx=(0, 10), pady=1, sticky="e")
 
-# Create a "Total" button for submitting input with the same style as "Open File" button
-total_button = ttk.Button(window, text="Total", command=display_weekly_total)
-total_button.grid(row=len(categories) + 1, column=1, columnspan=2, pady=10)
+# Create an "Open File" button for opening the Excel file with the same style as "Confirm" button
+open_file_button = tk.Button(
+    window, text="Open File", command=open_excel_file, width=max_button_width, pady=1)
+open_file_button.grid(row=len(categories) - 1, column=3,
+                      padx=(0, 10), pady=(5, 0), sticky="e")
+
+# Create a "Total" button for displaying weekly total with the same style as other buttons
+total_button = tk.Button(
+    window, text="Total", command=display_weekly_total, width=max_button_width, pady=1)
+total_button.grid(row=len(categories), column=3,
+                  padx=(0, 10), pady=(0, 5), sticky="e")
+
 
 # Create a label for displaying the weekly total
 total_label = Label(window, text="", font=("Arial", 10))
-total_label.grid(row=len(categories) + 1, column=2, columnspan=2, pady=10)
-
-# Create a "Open File" button for opening the Excel file
-open_file_button = Button(window, text="Open File", command=open_excel_file)
-open_file_button.grid(row=len(categories) + 1, column=0, columnspan=2, pady=10)
+total_label.grid(row=len(categories), column=4, padx=10, pady=1, sticky="e")
 
 # Start the main event loop for the application window
 window.mainloop()
