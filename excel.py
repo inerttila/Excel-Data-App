@@ -453,7 +453,7 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 600
+window_width = 400
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -503,7 +503,7 @@ for i, category in enumerate(categories):
     elif category == "Date":
         input_values[category] = StringVar(window)
         date_label = Label(window, textvariable=input_values[category])
-        date_label.grid(row=i, column=2)
+        date_label.grid(row=i, column=1)
     elif category == "Hours":
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), "%P")
@@ -531,15 +531,16 @@ for i, category in enumerate(categories):
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky="w")
 
-# Create a "Select Date" button for date selection
-select_date_button = Button(
-    window, text="Select Date", command=select_date)
-select_date_button.grid(row=len(categories) - 6, column=3,
-                        padx=(0, 10), pady=1, sticky="e")
 
 # Calculate the maximum width of "Confirm," "Send File," "Open File," and "Total" buttons
 max_button_width = max(len("Confirm"), len("Send File"),
-                       len("Open File"), len("Total"))
+                       len("Open File"), len("Total"), len("Select Date"))
+
+# Create a "Select Date" button for date selection
+select_date_button = tk.Button(
+    window, text="Select Date", command=select_date, width=max_button_width, pady=1)
+select_date_button.grid(row=len(categories) - 6, column=3,
+                        padx=(0, 10), pady=1, sticky="e")
 
 # Create a "Confirm" button for submitting input with the same style as "Send File" button
 confirm_button = tk.Button(window, text="Confirm",
