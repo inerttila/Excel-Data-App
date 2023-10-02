@@ -44,9 +44,9 @@ def display_weekly_total():
     global worksheet
     weekly_total_hours = calculate_weekly_total_hours(worksheet)
 
-    # Display the weekly total
-    weekly_total_message = f"Weekly Total Hours: {weekly_total_hours} hours"
-    total_label.config(text=weekly_total_message)
+    # Show the total hours message as a messagebox
+    weekly_total_message = f"Total Hours: {weekly_total_hours} hours"
+    messagebox.showinfo("Total Hours", weekly_total_message)
 
 
 # Function to apply header styles to a worksheet
@@ -565,13 +565,6 @@ total_button = tk.Button(
     window, text="Total", command=display_weekly_total, width=max_button_width, pady=1)
 total_button.grid(row=len(categories) - 2, column=3,
                   padx=(0, 10), pady=1, sticky="e")
-
-
-# Create a label for displaying the weekly total
-total_label = Label(window, text="", font=("Arial", 10))
-total_label.grid(row=len(categories) - 2, column=4,
-                 padx=10, pady=1, sticky="e")
-
 
 # Start the main event loop for the application window
 window.mainloop()
