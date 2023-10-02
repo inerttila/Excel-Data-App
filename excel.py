@@ -162,6 +162,7 @@ def select_date():
     calendar_position_row = 1
     calendar_position_column = 1
     cal = Calendar(top)
+
     cal.grid(
         row=calendar_position_row, column=calendar_position_column, padx=10, pady=10
     )
@@ -453,7 +454,7 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 450
+window_width = 500
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -466,7 +467,8 @@ window.geometry(
 for i, category in enumerate(categories):
     label = Label(window, text=category,
                   background="#333333", foreground="white")
-    label.grid(row=i, column=0)
+    pady_value = 6
+    label.grid(row=i, column=0, padx=(10, 20), pady=(pady_value, pady_value))
 
     # Create input fields based on the category
     if category == "Company":
@@ -502,8 +504,10 @@ for i, category in enumerate(categories):
         task_option_menu.grid(row=i, column=1)
     elif category == "Date":
         input_values[category] = StringVar(window)
-        date_label = Label(window, textvariable=input_values[category])
+        date_label = Label(
+            window, textvariable=input_values[category], bg="#333333", fg="white")
         date_label.grid(row=i, column=1)
+
     elif category == "Hours":
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), "%P")
