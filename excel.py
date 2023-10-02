@@ -453,7 +453,7 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 400
+window_width = 450
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -540,32 +540,32 @@ max_button_width = max(len("Confirm"), len("Send File"),
 select_date_button = tk.Button(
     window, text="Select Date", command=select_date, width=max_button_width, pady=1)
 select_date_button.grid(row=len(categories) - 6, column=3,
-                        padx=(0, 10), pady=1, sticky="e")
+                        padx=(5, 10), pady=1, sticky="e")
 
 # Create a "Confirm" button for submitting input with the same style as "Send File" button
 confirm_button = tk.Button(window, text="Confirm",
                            command=confirm_input, width=max_button_width)
 confirm_button.grid(row=len(categories) - 5, column=3,
-                    padx=(0, 10), pady=1, sticky="e")
+                    padx=(5, 10), pady=1, sticky="e")
 
 # Create a "Send File" button for copying the Excel file to the server with the same style
 send_file_button = tk.Button(
     window, text="Send File", command=lambda: copy_to_server(local_file_path), width=max_button_width, pady=1
 )
 send_file_button.grid(row=len(categories) - 4, column=3,
-                      padx=(0, 10), pady=1, sticky="e")
+                      padx=(50, 10), pady=1, sticky="e")
 
 # Create an "Open File" button for opening the Excel file with the same style as "Confirm" button
 open_file_button = tk.Button(
     window, text="Open File", command=open_excel_file, width=max_button_width, pady=1)
 open_file_button.grid(row=len(categories) - 3, column=3,
-                      padx=(0, 10), pady=1, sticky="e")
+                      padx=(5, 10), pady=1, sticky="e")
 
 # Create a "Total" button for displaying weekly total with the same style as other buttons
 total_button = tk.Button(
     window, text="Total", command=display_weekly_total, width=max_button_width, pady=1)
 total_button.grid(row=len(categories) - 2, column=3,
-                  padx=(0, 10), pady=1, sticky="e")
+                  padx=(5, 10), pady=1, sticky="e")
 
 # Start the main event loop for the application window
 window.mainloop()
