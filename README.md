@@ -42,6 +42,11 @@ Feel free to customize the Excel file style, including fonts, colors, and more, 
 
 The Timesheet Management Application includes a feature that automatically calculates your weekly total hours. When you input your work hours for various tasks and days, the application sums up these hours to provide you with a convenient weekly total. This calculation ensures you have an accurate overview of your work hours, making it easy to track your progress and manage your time effectively.
 
+##### Send and Open Files
+
+- With the "Send File" functionality, you can easily share your timesheet data with colleagues or clients by sending the Excel file directly from the application.
+- The "Open File" function allows you to open existing timesheet files for editing or reference. Simply choose a file from your computer, and the application will load it for you.
+
 ## Requirements
 
 To run this application, you need the following:
@@ -57,6 +62,7 @@ Clone the repository to your local machine:
 ```bash
   git clone https://github.com/inerttila/excel-data.git
 ```
+
 ```bash
   cd excel-data
 ```
@@ -71,7 +77,7 @@ Install the required Python packages by running the following command in the pro
 
 You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
 
-1. Locate the following line of code in the Python script (`excel.py`):
+1. Locate the following line of code in the Python script (`excel.pyw`):
 
 ```python
   file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
@@ -123,7 +129,7 @@ Ensure you have Python installed on your system. If not, install or update it fr
 Execute the Python script to run the application:
 
 ```bash
-  python excel.py
+  python excel.pyw
 ```
 
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `excel-data` folder within the project directory.
