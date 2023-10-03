@@ -11,6 +11,7 @@ from openpyxl import load_workbook
 from openpyxl.styles import Alignment, Font, PatternFill
 from openpyxl.utils import get_column_letter
 from tkcalendar import Calendar, DateEntry
+from email_sender import send_email
 
 
 # Function to calculate weekly total hours
@@ -539,7 +540,7 @@ for i, category in enumerate(categories):
 
 # Calculate the maximum width of "Confirm," "Send File," "Open File," and "Total" buttons
 max_button_width = max(len("Confirm"), len("Send File"),
-                       len("Open File"), len("Total"), len("Select Date"))
+                       len("Open File"), len("Total"), len("Select Date"), len("send_email"))
 
 # Create a "Select Date" button for date selection
 select_date_button = tk.Button(
@@ -571,6 +572,12 @@ total_button = tk.Button(
     window, text="Total", command=display_weekly_total, width=max_button_width, pady=1)
 total_button.grid(row=len(categories) - 2, column=3,
                   padx=(5, 10), pady=1, sticky="e")
+
+# Create a "Send Email" button
+send_email_button = tk.Button(
+    window, text="Send Email", command=send_email, width=max_button_width, pady=1)
+send_email_button.grid(row=len(categories) - 1, column=3,
+                       padx=(5, 10), pady=1, sticky="e")
 
 # Start the main event loop for the application window
 window.mainloop()
