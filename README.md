@@ -45,8 +45,12 @@ The Timesheet Management Application includes a feature that automatically calcu
 
 ##### Send and Open Files
 
-- With the "Send File" functionality, you can easily share your timesheet data with colleagues or clients by sending the Excel file directly from the application.
-- The "Open File" function allows you to open existing timesheet files for editing or reference. Simply choose a file from your computer, and the application will load it for you.
+With the "Send File" functionality, you can easily share your timesheet data with colleagues or clients by sending the Excel file directly from the application.
+The "Open File" function allows you to open existing timesheet files for editing or reference. Simply choose a file from your computer, and the application will load it for you.
+
+### Excel Backup Automator
+
+Automate Excel file backups with timestamped copies, ensuring data safety and easy retrieval.
 
 ## Requirements
 
