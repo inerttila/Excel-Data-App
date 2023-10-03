@@ -84,26 +84,6 @@ def load_or_create_workbook(file_path):
     try:
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
-        # Create a new workbook and apply styles
-        workbook = openpyxl.Workbook()
-
-        # Set the column widths for the new sheet
-        column_widths = {
-            "A": 15,  # Date
-            "B": 20,  # Service Line
-            "C": 20,  # Type of Service
-            "D": 20,  # Company
-            "E": 20,  # Task
-            "F": 10,  # Hours
-            "G": 50,  # Notes
-        }
-
-        # Create the "Sheet" sheet
-        worksheet = workbook.active
-        worksheet.title = "Sheet"
-        for column, width in column_widths.items():
-            worksheet.column_dimensions[column].width = width
-
         # Save the workbook
         workbook.save(file_path)
 
@@ -387,10 +367,30 @@ type_of_service_options = ["Software", "Hardware", "Other", "-"]
 task_options = ["Development", "Control", "Research", "Testing", "Other", "-"]
 input_values = {}
 
+
+# Function to set column widths for a sheet
+def set_column_widths(sheet):
+    column_widths = {
+        "A": 15,  # Date
+        "B": 20,  # Service Line
+        "C": 20,  # Type of Service
+        "D": 20,  # Company
+        "E": 20,  # Task
+        "F": 10,  # Hours
+        "G": 50,  # Notes
+    }
+
+    for column, width in column_widths.items():
+        sheet.column_dimensions[column].width = width
+
+
 # Create necessary directories, load or create workbook and worksheet
 create_directory_if_not_exists(file_path)
 workbook = load_or_create_workbook(file_path)
 worksheet = workbook["Sheet"]
+
+# Set column widths
+set_column_widths(workbook.active)
 
 # Apply header styles to the worksheet
 apply_header_styles(worksheet, categories)
