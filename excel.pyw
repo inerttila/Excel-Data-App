@@ -151,13 +151,14 @@ def select_date():
 
     # Create a "Confirm" button for date selection
     confirm_button = ttk.Button(
-        top, text="Confirm", command=on_date_selected, style="TButton"
+        top, text="Confirm", command=on_date_selected, style="Custom.TButton"
     )
     confirm_button.grid(
         row=calendar_position_row + 1, column=calendar_position_column, padx=10, pady=10
     )
 
     # Function to close the pop-up window
+
     def close_window():
         top.destroy()
         select_date.calendar_open = False
