@@ -13,7 +13,7 @@ from openpyxl.utils import get_column_letter
 from tkcalendar import Calendar, DateEntry
 from backup_excel import create_backup
 from buttons import create_buttons
-from email_sender import send_email
+# from email_sender import send_email
 
 
 # Function to calculate weekly total hours
@@ -546,7 +546,7 @@ max_button_width = max(len(label) for label in button_labels)
 
 # Call the create_buttons function to create the buttons
 buttons = create_buttons(
-    window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup, send_email)
+    window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup)  # Add "send_email" here
 
 # Start the main event loop for the application window
 window.mainloop()

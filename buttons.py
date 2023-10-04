@@ -4,7 +4,9 @@ import tkinter as tk
 local_file_path = "C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx"
 
 
-def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup, send_email):
+def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup,
+                   ):  # Add "send_email" here
+
     # Create a "Select Date" button for date selection
     select_date_button = tk.Button(
         window, text="Select Date", command=select_date, width=max_button_width, pady=1)
@@ -42,10 +44,10 @@ def create_buttons(window, categories, max_button_width, select_date, confirm_in
     backup_button.grid(row=len(categories) - 1, column=3,
                        padx=(5, 10), pady=1, sticky="e")
 
-    # Create a "Send Email" button
-    send_email_button = tk.Button(
-        window, text="Send Email", command=send_email, width=max_button_width, pady=1)
-    send_email_button.grid(row=len(categories) - 1, column=4,
-                           padx=(5, 10), pady=1, sticky="e")
+    # # Create a "Send Email" button
+    # send_email_button = tk.Button(
+    #     window, text="Send Email", command=send_email, width=max_button_width, pady=1)
+    # send_email_button.grid(row=len(categories) - 1, column=4,
+    #                        padx=(5, 10), pady=1, sticky="e")
 
-    return select_date_button, confirm_button, send_file_button, open_file_button, total_button, create_backup, send_email
+    return select_date_button, confirm_button, send_file_button, open_file_button, total_button, create_backup,  # send_email
