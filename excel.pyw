@@ -3,14 +3,13 @@ import os
 import shutil
 import tkinter as tk
 import tkinter.messagebox as messagebox
-from tkinter import (Button, Entry, Label, OptionMenu, StringVar, Text, Tk,
+from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
                      Toplevel, simpledialog, ttk)
 
 import openpyxl
 from openpyxl import load_workbook
-from openpyxl.styles import Alignment, Font, PatternFill
-from openpyxl.utils import get_column_letter
-from tkcalendar import Calendar, DateEntry
+from openpyxl.styles import Font, PatternFill
+from tkcalendar import Calendar
 from backup_excel import create_backup
 from buttons import create_buttons
 # from email_sender import send_email
@@ -546,7 +545,8 @@ max_button_width = max(len(label) for label in button_labels)
 
 # Call the create_buttons function to create the buttons
 buttons = create_buttons(
-    window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup)  # Add "send_email" here
+    window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total,
+    create_backup)  # Add "send_email" here
 
 # Start the main event loop for the application window
 window.mainloop()
