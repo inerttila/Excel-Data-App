@@ -356,7 +356,11 @@ categories = [
     "Hours",
     "Notes",
 ]
-company_options = ["SKAITECH", "3DSKAI", "-"]
+company_options = [
+    "SKAITECH",
+    "3DSKAI",
+    "-"
+]
 service_options = [
     "Develop",
     "Drones/Robotics",
@@ -367,8 +371,20 @@ service_options = [
     "Research",
     "-",
 ]
-type_of_service_options = ["Software", "Hardware", "Other", "-"]
-task_options = ["Development", "Control", "Research", "Testing", "Other", "-"]
+type_of_service_options = [
+    "Software",
+    "Hardware",
+    "Other",
+    "-"
+]
+task_options = [
+    "Development",
+    "Control",
+    "Research",
+    "Testing",
+    "Other",
+    "-"
+]
 input_values = {}
 
 
