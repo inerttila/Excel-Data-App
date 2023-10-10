@@ -120,7 +120,7 @@ def select_date():
     # Create a pop-up window for date selection
     top = Toplevel()
     top.title("Select Date")
-    top.configure(background="#333333")
+    top.configure(background="#000000")
 
     # Set the icon for the pop-up window
     icon = tk.PhotoImage(
@@ -131,9 +131,9 @@ def select_date():
     style = ttk.Style(top)
     style.configure(
         "Calendar.Treeview",
-        background="#333333",
-        foreground="white",
-        fieldbackground="#333333",
+        background="#000000",
+        foreground="#FCFCFC",
+        fieldbackground="#000000",
     )
 
     style.configure(
@@ -470,7 +470,7 @@ def create_sheet_with_headers(headers, rd):
 # Create the main application window
 window = Tk()
 window.title("Timesheet Application")
-window.configure(background="#333333")
+window.configure(background="#000000")
 icon = tk.PhotoImage(
     file="C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png")
 window.iconphoto(False, icon)
@@ -488,7 +488,7 @@ window.geometry(
 # Create labels and input fields for each category
 for i, category in enumerate(categories):
     label = Label(window, text=category,
-                  background="#333333", foreground="white")
+                  background="#000000", foreground="#FCFCFC")
     pady_value = 6
     label.grid(row=i, column=0, padx=(10, 20), pady=(pady_value, pady_value))
 
@@ -527,7 +527,7 @@ for i, category in enumerate(categories):
     elif category == "Date":
         input_values[category] = StringVar(window)
         date_label = Label(
-            window, textvariable=input_values[category], bg="#333333", fg="white")
+            window, textvariable=input_values[category], bg="#000000", fg="#FCFCFC")
         date_label.grid(row=i, column=1)
 
     elif category == "Hours":
