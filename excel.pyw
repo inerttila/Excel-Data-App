@@ -15,9 +15,8 @@ from buttons import create_buttons
 # from email_sender import send_email
 
 
-# Function to calculate weekly total hours
 def calculate_weekly_total_hours(worksheet):
-    weekly_total_hours = 0
+    weekly_total_hours = 0.0
     today = datetime.date.today()
 
     # Check if today is Monday (weekday() returns 0 for Monday)
@@ -28,7 +27,7 @@ def calculate_weekly_total_hours(worksheet):
         ):
             if row[0] is not None:
                 if isinstance(row[0], (int, float, str)):
-                    weekly_total_hours += int(row[0])
+                    weekly_total_hours += float(row[0])
     else:
         # For other days, calculate the total as before
         for row in worksheet.iter_rows(
@@ -36,7 +35,7 @@ def calculate_weekly_total_hours(worksheet):
         ):
             if row[0] is not None:
                 if isinstance(row[0], (int, float, str)):
-                    weekly_total_hours += int(row[0])
+                    weekly_total_hours += float(row[0])
 
     return weekly_total_hours
 
@@ -214,6 +213,9 @@ def confirm_input():
             if category == "Notes":
                 value = entry.get("1.0", "end-1c")
             row_data.append(value)
+
+        # Convert the hours input to a float
+        row_data[5] = float(row_data[5])
 
         # Calculate the total hours per week
         weekly_total_hours = calculate_weekly_total_hours(worksheet)
