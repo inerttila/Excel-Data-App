@@ -69,11 +69,11 @@ To run this application, you need the following:
 Clone the repository to your local machine:
 
 ```bash
-  git clone https://github.com/inerttila/excel-data.git
+  git clone https://github.com/inerttila/Excel-Data-App.git
 ```
 
 ```bash
-  cd excel-data
+  cd Excel-Data-App
 ```
 
 Install the required Python packages by running the following command in the project's root directory:
@@ -89,7 +89,7 @@ You can customize the file path where the Excel file is saved based on your pref
 1. Locate the following line of code in the Python script (`excel.pyw`):
 
 ```python
-  file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+  file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
 ```
 
 ## Usage with Compiling the C++ Part (main.cpp)
@@ -106,7 +106,7 @@ To compile the C++ part of the application, follow these steps:
 
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
 
-By default, the Excel file will be automatically created and saved in the `excel-data` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
+By default, the Excel file will be automatically created and saved in the `Excel-Data-App` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
 
 ## Usage
 
@@ -141,7 +141,7 @@ Execute the Python script to run the application:
   python excel.pyw
 ```
 
-When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `excel-data` folder within the project directory.
+When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `Excel-Data-App` folder within the project directory.
 
 ## Email Sender using Python and Gmail
 
