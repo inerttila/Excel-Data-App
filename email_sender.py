@@ -35,7 +35,7 @@
 #     message.attach(MIMEText(body, 'plain'))
 
 #     # Attach the Excel file
-#     file_path = 'C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx'
+#     file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
 #     attachment = open(file_path, 'rb')
 #     excel_part = MIMEBase('application', 'octet-stream')
 #     excel_part.set_payload((attachment).read())

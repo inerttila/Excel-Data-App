@@ -2,7 +2,7 @@ import tkinter as tk
 from tkinter import ttk
 
 # Define the local file path for copying to the server
-local_file_path = "C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx"
+local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
 
 
 def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file,

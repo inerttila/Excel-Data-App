@@ -4,7 +4,7 @@
 
 int main() {
     // Path to your Python script
-    const std::string PYTHON_SCRIPT_PATH = "C:\\Users\\User\\Desktop\\excel-data\\excel.pyw";
+    const std::string PYTHON_SCRIPT_PATH = "C:\\Users\\User\\Desktop\\Excel-Data-App\\excel.pyw";
 
     // Construct the full command with the script path
     std::string command = "python " + PYTHON_SCRIPT_PATH;

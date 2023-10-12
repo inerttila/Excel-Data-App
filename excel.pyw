@@ -124,7 +124,7 @@ def select_date():
 
     # Set the icon for the pop-up window
     icon = tk.PhotoImage(
-        file="C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png")
+        file="C:\\Users\\User\\Desktop\\Excel-Data-App\\Media\\otr.png")
     top.iconphoto(False, icon)
 
     # Configure style for the calendar and buttons
@@ -314,7 +314,7 @@ def reset_option_menu(option_menu, options):
 
 # Define the path to the Excel file
 file_path = os.path.join(
-    "C:\\Users\\User\\Desktop\\excel-data", "Timesheet-managementt.xlsx"
+    "C:\\Users\\User\\Desktop\\Excel-Data-App", "Timesheet-managementt.xlsx"
 )
 
 # Check if the file exists
@@ -328,7 +328,7 @@ else:
 
 
 # Define the local file path for copying to the server
-local_file_path = "C:\\Users\\User\\Desktop\\excel-data\\Timesheet-managementt.xlsx"
+local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
 
 # Server file path
 server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
@@ -472,7 +472,7 @@ window = Tk()
 window.title("Timesheet Application")
 window.configure(background="#000000")
 icon = tk.PhotoImage(
-    file="C:\\Users\\User\\Desktop\\EXCEL-DATA\\Media\\otr.png")
+    file="C:\\Users\\User\\Desktop\\Excel-Data-App\\Media\\otr.png")
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
