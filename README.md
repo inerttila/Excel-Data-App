@@ -111,20 +111,11 @@ By default, the Excel file will be automatically created and saved in the `Excel
 ## Usage
 
 Create and activate a virtual environment:
-On Windows:
 
 ```bash
   python -m venv venv
 
   venv\Scripts\activate
-```
-
-On macOS/Linux:
-
-```bash
-python -m venv venv
-
-source venv/bin/activate
 ```
 
 Install the required Python packages by running the following command :
