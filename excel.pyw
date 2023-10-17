@@ -12,32 +12,19 @@ from openpyxl.styles import Font, PatternFill
 from tkcalendar import Calendar
 from backup_excel import create_backup
 from buttons import create_buttons
+from copyserver import copy_to_server
+from weekly_totals import calculate_weekly_total_hours
 # from email_sender import send_email
 
 
-def calculate_weekly_total_hours(worksheet):
-    weekly_total_hours = 0.0
-    today = datetime.date.today()
+# Define file paths as constants
+base_dir = os.path.dirname(os.path.abspath(__file__))
+excel_file_name = "Timesheet-managementt.xlsx"
+excel_file_path = os.path.join(base_dir, excel_file_name)
 
-    # Check if today is Monday (weekday() returns 0 for Monday)
-    if today.weekday() == 0:
-        # If it's Monday, only calculate hours for the current week
-        for row in worksheet.iter_rows(
-            min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
-        ):
-            if row[0] is not None:
-                if isinstance(row[0], (int, float, str)):
-                    weekly_total_hours += float(row[0])
-    else:
-        # For other days, calculate the total as before
-        for row in worksheet.iter_rows(
-            min_row=2, max_row=worksheet.max_row, min_col=6, max_col=6, values_only=True
-        ):
-            if row[0] is not None:
-                if isinstance(row[0], (int, float, str)):
-                    weekly_total_hours += float(row[0])
-
-    return weekly_total_hours
+# Constants for local and server file paths
+local_file_path = excel_file_path  # Local path is the same as the Excel file path
+server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
 
 
 # Calculate the weekly total hours by summing the hours in the worksheet
@@ -274,7 +261,7 @@ def confirm_input():
 
         worksheet.append(row_data)
         sheet_2023.append(row_data)
-        workbook.save(file_path)
+        workbook.save(excel_file_path)
 
         # Reset input values and user interface elements
         for category in categories:
@@ -312,40 +299,14 @@ def reset_option_menu(option_menu, options):
     input_values[option_menu.category].set(options[0])
 
 
-# Define the path to the Excel file
-file_path = os.path.join(
-    "C:\\Users\\User\\Desktop\\Excel-Data-App", "Timesheet-managementt.xlsx"
-)
-
 # Check if the file exists
-if os.path.isfile(file_path):
+if os.path.isfile(excel_file_path):
     # The file exists, load it
-    workbook = load_workbook(file_path)
+    workbook = load_workbook(excel_file_path)
 else:
     # The file doesn't exist, create it
     workbook = openpyxl.Workbook()
-    workbook.save(file_path)
-
-
-# Define the local file path for copying to the server
-local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
-
-# Server file path
-server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
-
-
-# Function to copy the file to the server path
-def copy_to_server(local_file_path):
-    try:
-        # Copy the Excel file to the server path
-        shutil.copy(local_file_path, server_file_path)
-        messagebox.showinfo(
-            "Success", "Excel file copied to the server successfully.")
-    except Exception as e:
-        messagebox.showerror(
-            "Error", f"Error copying Excel file to the server: {str(e)}"
-        )
-
+    workbook.save(excel_file_path)
 
 # File path and initial data setup
 workbook = load_workbook(local_file_path)
@@ -407,8 +368,8 @@ def set_column_widths(sheet):
 
 
 # Create necessary directories, load or create workbook and worksheet
-create_directory_if_not_exists(file_path)
-workbook = load_or_create_workbook(file_path)
+create_directory_if_not_exists(excel_file_path)
+workbook = load_or_create_workbook(excel_file_path)
 worksheet = workbook["Sheet"]
 
 # Set column widths
@@ -421,7 +382,7 @@ apply_header_styles(worksheet, categories)
 # Open the Excel file using the default program
 def open_excel_file():
     try:
-        os.startfile(file_path)
+        os.startfile(excel_file_path)
     except Exception as e:
         messagebox.showerror("Error", f"Error opening Excel file: {str(e)}")
 
@@ -433,7 +394,7 @@ def delete_sheet(wb, sheet_name):
         if sheet_name in workbook.sheetnames:
             sheet = workbook[sheet_name]
             workbook.remove(sheet)
-            workbook.save(file_path)
+            workbook.save(excel_file_path)
     except Exception as e:
         messagebox.showerror("Error", f"An error occurred: {str(e)}")
 
@@ -458,11 +419,11 @@ def create_sheet_with_headers(headers, rd):
         for column, width in column_widths.items():
             new_sheet.column_dimensions[column].width = width
 
-        # workbook.save(file_path)
+        # workbook.save(excel_file_path)
         new_sheet.append(rd)
 
         # Save the workbook after appending data
-        workbook.save(file_path)
+        workbook.save(excel_file_path)
     except Exception as e:
         pass
 
