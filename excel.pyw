@@ -1,6 +1,5 @@
 import datetime
 import os
-import shutil
 import tkinter as tk
 import tkinter.messagebox as messagebox
 from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
@@ -520,7 +519,7 @@ for i, category in enumerate(categories):
 
 # Calculate the maximum width among button labels
 button_labels = ["Confirm", "Send File",
-                 "Open File", "Total", "Select Date", "Backup"]
+                 "Open File", "Total", "Select Date", "Backup", "send_email"]
 max_button_width = max(len(label) for label in button_labels)
 
 # Call the create_buttons function to create the buttons
