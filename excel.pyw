@@ -22,7 +22,7 @@ excel_file_name = "Timesheet-managementt.xlsx"
 excel_file_path = os.path.join(base_dir, excel_file_name)
 
 # Constants for local and server file paths
-local_file_path = excel_file_path  # Local path is the same as the Excel file path
+local_file_path = excel_file_path
 server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
 
 
@@ -80,7 +80,8 @@ def load_or_create_workbook(file_path):
 # Function to handle user input for categories with options
 def select_option(category, options):
     try:
-        value = simpledialog.askstring("Data Input", f"Enter {category}:")
+        value = simpledialog.askstring("Data Input",
+                                       f"Enter {category}:")
         if value in options:
             input_values[category].set(value)
         else:
@@ -113,17 +114,17 @@ def select_date():
         file="C:\\Users\\User\\Desktop\\Excel-Data-App\\Media\\otr.png")
     top.iconphoto(False, icon)
 
-    # Configure style for the calendar and buttons
     style = ttk.Style(top)
     style.configure(
         "Calendar.Treeview",
         background="#000000",
         foreground="#FCFCFC",
-        fieldbackground="#000000",
+        fieldbackground="#000000"
     )
 
     style.configure(
-        "TButton", foreground="black", background="#061c43", font=("Arial", 9, "bold")
+        "TButton", foreground="black", background="#061c43",
+        font=("Arial", 9, "bold")
     )
     # Create a calendar widget for date selection
     calendar_position_row = 1
@@ -131,7 +132,8 @@ def select_date():
     cal = Calendar(top)
 
     cal.grid(
-        row=calendar_position_row, column=calendar_position_column, padx=10, pady=10
+        row=calendar_position_row, column=calendar_position_column,
+        padx=10, pady=10
     )
 
     # Create a "Confirm" button for date selection
@@ -423,7 +425,7 @@ def create_sheet_with_headers(headers, rd):
 
         # Save the workbook after appending data
         workbook.save(excel_file_path)
-    except Exception as e:
+    except Exception:
         pass
 
 
