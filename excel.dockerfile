@@ -17,7 +17,7 @@ RUN mkdir -p ~/.vnc && echo "inert" | vncpasswd -f > ~/.vnc/passwd && chmod 600 
 RUN echo "geometry=1920x1080" >> ~/.vnc/xstartup
 
 # Expose the VNC port
-EXPOSE 5901
+EXPOSE 8080
 
 # Set the environment variable for Xfce
 ENV DEBIAN_FRONTEND=noninteractive
