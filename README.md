@@ -91,7 +91,9 @@ Create and activate a virtual environment:
 
 ```bash
   python -m venv venv
+```
 
+```bash
   venv\Scripts\activate
 ```
 
@@ -116,7 +118,7 @@ This project demonstrates how to send emails with attachments using Python and G
 Before using this code, ensure you have the following prerequisites in place:
 
 ```bash
-pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
+  pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 ```
 
 ## Contact
