@@ -9,7 +9,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Installation](#installation)
 - [Compiling the C++ Part (main.cpp)](#compiling-the-c-part-maincpp)
 - [Usage](#usage)
-- [Email Sender using Python and Gmail](#Email-Sender-using-Python-and-Gmail)
+- [Email Sender using Python and Gmail API](#Email-Sender-using-Python-and-Gmail-API)
 - [Contact](#contact)
 
 ## Introduction
@@ -134,7 +134,7 @@ Execute the Python script to run the application:
 
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `Excel-Data-App` folder within the project directory.
 
-## Email Sender using Python and Gmail
+## Email Sender using Python and Gmail API
 
 This project demonstrates how to send emails with attachments using Python and Gmail. It provides an example of sending emails with Excel file attachments using the Gmail API and OAuth2 authentication.
 
