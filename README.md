@@ -26,13 +26,21 @@ Data saved in Excel for record-keeping and analysis.
 Additional Features:
 
 Weekly Sheet: Starts fresh each week for organized tracking.
+
 Yearly Sheet: Separates data by week for readability.
+
 Customizable Pop-Up Window Style: Tailor the user interface.
+
 Calculate Weekly Total Hours: Easily track your work hours.
+
 Send Files: Share Timesheet data for other user.
+
 Open Excel Files: Access Timesheet Data.
+
 Excel Backup Automator: Automated file backups.
+
 Email Excel Files: Secure data sharing via Gmail API.
+
 Dockerfile for Python app with GUI.
 
 This concise introduction provides an overview of the Timesheet Management Application's key features and additional functionalities.
