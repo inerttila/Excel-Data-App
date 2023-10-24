@@ -14,45 +14,28 @@ A Python and C++-based timesheet management application for tracking work hours 
 
 ## Introduction
 
-The Timesheet Management Application simplifies the process of recording and managing work-related data, making it efficient and user-friendly. It offers the following key features:
+The Timesheet Management Application streamlines the recording and management of work-related data with efficiency and user-friendliness. It offers the following features:
 
-- Input work details such as date, service line, type of service, company, task, hours worked, and notes.
-- Option menus for selecting specific categories like service line, type of service, company, and task.
-- A date picker for easy date selection.
-- Validation checks for hours input.
-- An organized and visually appealing user interface.
-- Data is saved in an Excel workbook for record-keeping and analysis.
+Input work details: date, service line, type of service, company, task, hours worked, and notes.
+Option menus for selecting categories.
+A date picker for easy date selection.
+Validation checks for hours input.
+Organized user interface.
+Data saved in Excel for record-keeping and analysis.
 
-Additionally, here are some important details about the application:
+Additional Features:
 
-##### Weekly Sheet
+Weekly Sheet: Starts fresh each week for organized tracking.
+Yearly Sheet: Separates data by week for readability.
+Customizable Pop-Up Window Style: Tailor the user interface.
+Calculate Weekly Total Hours: Easily track your work hours.
+Send Files: Share Timesheet data for other user.
+Open Excel Files: Access Timesheet Data.
+Excel Backup Automator: Automated file backups.
+Email Excel Files: Secure data sharing via Gmail API.
+Dockerfile for Python app with GUI.
 
-Every week, the weekly sheet is cleared, allowing you to start fresh for the new week's work entries. This ensures that your data is neatly organized by week, making it easier to track your work hours.
-
-##### Yearly Sheet
-
-The yearly sheet is designed to print an empty line at the beginning of each week, making it easy to separate data by week. This feature enhances the readability and organization of your work records over time.
-
-##### Customizable Pop-Up Window Style
-
-The application provides control over the style of pop-up windows using Python, allowing you to tailor the user interface to your preferences. You can modify the appearance and behavior of pop-up windows to match your desired style and user experience.
-
-Feel free to customize the Excel file style, including fonts, colors, and more, to suit your specific needs and preferences. This level of control ensures that your work records are not only accurate but also visually appealing and organized.
-
-##### Calculating Weekly Total Hours
-
-The Timesheet Management Application includes a feature that automatically calculates your weekly total hours. When you input your work hours for various tasks and days, the application sums up these hours to provide you with a convenient weekly total. This calculation ensures you have an accurate overview of your work hours, making it easy to track your progress and manage your time effectively.
-
-##### Send and Open Files
-
-With the "Send File" functionality, you can easily share your timesheet data with colleagues or clients by sending the Excel file directly from the application.
-The "Open File" function allows you to open existing timesheet files for editing or reference. Simply choose a file from your computer, and the application will load it for you.
-
-#### Excel Backup Automator
-
-Automate Excel file backups with timestamped copies, ensuring data safety and easy retrieval.
-
-#### Automated Emailing of Excel Files via Gmail API
+This concise introduction provides an overview of the Timesheet Management Application's key features and additional functionalities.
 
 This Python script utilizes the Gmail API for secure email transmission of Excel files, ensuring efficient and protected data sharing between users.
 
@@ -62,7 +45,6 @@ To run this application, you need the following:
 
 - Python 3.x (Check your Python version using `python --version`)
 - C++ build environment and compatible compiler (for the C++ part)
-- Required Python packages (specified in `requirements.txt`)
 
 ## Installation
 
@@ -96,9 +78,8 @@ You can customize the file path where the Excel file is saved based on your pref
 
 To compile the C++ part of the application, follow these steps:
 
-1. Open your command prompt or terminal.
-2. Navigate to the project's root directory.
-3. Use the `g++` command to compile the `main.cpp` file and create an executable named `timesheet_app`. Run the following command:
+1. Open your terminal and navigate to the project's root directory
+2. Use the `g++` command to compile the `main.cpp` file and create an executable named `timesheet_app`. Run the following command:
 
 ```bash
   g++ main.cpp -o timesheet_app
@@ -124,15 +105,11 @@ Install the required Python packages by running the following command :
   pip install -r requirements.txt
 ```
 
-Ensure you have Python installed on your system. If not, install or update it from the Python official website.
-
 Execute the Python script to run the application:
 
 ```bash
   python excel.pyw
 ```
-
-When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. By default, the Excel file will be saved in the `Excel-Data-App` folder within the project directory.
 
 ## Email Sender using Python and Gmail API
 
