@@ -117,10 +117,6 @@ Before using this code, ensure you have the following prerequisites in place:
 
 - Python installed on your system (Python 3 recommended)
 - Required Python packages (install them using `pip`):
-  - `google-auth`
-  - `google-auth-oauthlib`
-  - `google-auth-httplib2`
-  - `google-api-python-client`
 
 ```bash
 pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
