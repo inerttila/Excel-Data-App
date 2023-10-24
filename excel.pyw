@@ -2,9 +2,6 @@ import datetime
 import os
 import tkinter as tk
 import tkinter.messagebox as messagebox
-from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
-                     Toplevel, simpledialog, ttk)
-
 import openpyxl
 from openpyxl import load_workbook
 from openpyxl.styles import Font, PatternFill
@@ -14,6 +11,8 @@ from buttons import create_buttons
 from copyserver import copy_to_server
 from weekly_totals import calculate_weekly_total_hours
 # from email_sender import send_email
+from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
+                     Toplevel, simpledialog, ttk)
 
 
 # Define file paths as constants
