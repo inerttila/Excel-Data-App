@@ -17,7 +17,7 @@ RUN mkdir -p ~/.vnc && echo "inert" | vncpasswd -f > ~/.vnc/passwd && chmod 600 
 RUN echo "geometry=1920x1080" >> ~/.vnc/xstartup
 
 # Expose the VNC port
-EXPOSE 8080
+EXPOSE 5902
 
 # Set the environment variable for Xfce
 ENV DEBIAN_FRONTEND=noninteractive
@@ -39,4 +39,4 @@ COPY . /app
 RUN pip install -r requirements.txt
 
 # Start the VNC server
-CMD ["tightvncserver", ":1"]
+CMD ["tightvncserver", ":2"]
