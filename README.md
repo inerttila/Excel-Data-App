@@ -75,7 +75,7 @@ You can customize the file path where the Excel file is saved based on your pref
 To compile the C++ part of the application, follow these steps:
 
 1. Open your terminal and navigate to the project's root directory
-2. Use the `g++` command to compile the `main.cpp` file and create an executable named `timesheet_app`. Run the following command:
+2. Use the `g++` command to compile the `main.cpp` file and create an executable named `yourapp_name`. Run the following command:
 
 ```bash
   g++ main.cpp -o timesheet_app
