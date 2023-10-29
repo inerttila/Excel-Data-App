@@ -78,7 +78,7 @@ To compile the C++ part of the application, follow these steps:
 2. Use the `g++` command to compile the `main.cpp` file and create an executable named `yourapp_name`. Run the following command:
 
 ```bash
-  g++ main.cpp -o timesheet_app
+  g++ main.cpp -o yourapp_name
 ```
 
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
