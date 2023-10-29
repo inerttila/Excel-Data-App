@@ -64,7 +64,7 @@ Install the required Python packages by running the following command in the pro
 
 You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
 
-1. Locate the following line of code in the Python script (`excel.pyw`):
+1. Locate the following line of code in the Python script :
 
 ```python
   file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
