@@ -7,7 +7,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Requirements](#requirements)![Uploading Screenshot 2023-10-30 175452.png…]()
+- [Requirements](#requirements)
 
 - [Installation](#installation)
 - [Compiling the C++ Part (main.cpp)](#compiling-the-c-part-maincpp)
