@@ -1,4 +1,5 @@
-# Timesheet Management Application ![Screenshot 2023-10-30 175452](https://github.com/inerttila/Excel-Data-App/assets/137422939/76cea38a-78b2-4b13-baa0-90e170f2232d)
+# Timesheet Management Application 
+![Screenshot 2023-10-30 175452](https://github.com/inerttila/Excel-Data-App/assets/137422939/76cea38a-78b2-4b13-baa0-90e170f2232d)
 
 
 A Python and C++-based timesheet management application for tracking work hours and tasks. This application provides an easy-to-use interface for users to input their work-related data, which is then stored and managed in an Excel workbook.
