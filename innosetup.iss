@@ -7,7 +7,7 @@ OutputDir=Output
 OutputBaseFilename=ExcelDataAppInstaller
 
 [Files]
-Source: "C:\Users\User\Desktop\Excel-Data-App\*"; DestDir: {app}; Flags: recursesubdirs createallsubdirs
+Source: "C:\Users\User\Desktop\Excel git\Excel-Data-App\*"; DestDir: {app}; Flags: recursesubdirs createallsubdirs
 
 [Icons]
 Name: "{commondesktop}\Excel App"; Filename: "{app}\excel.exe"; WorkingDir: {app}; IconFilename: "C:\Users\User\Desktop\Excel-Data-App\Media\otr.ico"

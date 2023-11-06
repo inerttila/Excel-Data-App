@@ -215,7 +215,7 @@ def confirm_input():
                 # Prompt the user for confirmation
                 user_choice = messagebox.askyesno(
                     "Weekly Hours Exceeded",
-                    "Adding this entry will exceed 40 weekly hours. Do you want to continue?",
+                    "Adding this entry will clear the the weekly 'Sheet' . Do you want to continue?",
                 )
                 if user_choice:
                     # User chose to continue, add an empty row before appending new data on Monday
