@@ -1,5 +1,3 @@
-#!/usr/bin/env python3.9
-
 import os
 import http.server
 import socketserver
@@ -8,12 +6,12 @@ import qrcode
 
 def generate_qr_code_and_start_server(file_path, filename):
     excel_directory = os.path.dirname(file_path)
-    qr_code_directory = os.path.join(excel_directory, "qr_photo")
+    qr_code_directory = os.path.join(excel_directory,)
 
     # Create the "qr_code_photo" directory if it doesn't exist
     os.makedirs(qr_code_directory, exist_ok=True)
 
-    os.chdir(qr_code_directory)
+    os.chdir(excel_directory)  # Set the server's base directory
 
     # Specify the port to run the server on
     PORT = 8000
@@ -32,8 +30,7 @@ def generate_qr_code_and_start_server(file_path, filename):
         box_size=10,
         border=4,
     )
-    # Enter you local ip addres
-    qr.add_data(f"http://192.168.40.14:{PORT}/{os.path.basename(file_path)}")
+    qr.add_data(f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx")
     qr.make(fit=True)
 
     # Create an image from the QR Code instance
