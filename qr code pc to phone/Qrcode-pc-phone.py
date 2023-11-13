@@ -32,6 +32,7 @@ def generate_qr_code_and_start_server(file_path, filename):
         box_size=10,
         border=4,
     )
+    # Enter you local ip addres
     qr.add_data(f"http://192.168.40.14:{PORT}/{os.path.basename(file_path)}")
     qr.make(fit=True)
 
