@@ -9,11 +9,9 @@ A Python and C++-based timesheet management application for tracking work hours 
 ## Table of Contents
 
 - [Introduction](#introduction)
-- [Requirements](#requirements)
-
 - [Installation](#installation)
-- [Compiling the C++ Part (main.cpp)](#compiling-the-c-part-maincpp)
 - [Usage](#usage)
+- [Compiling the C++ Part (main.cpp)](#compiling-the-c-part-maincpp)
 - [Email Sender using Python and Gmail API](#Email-Sender-using-Python-and-Gmail-API)
 - [Contact](#contact)
 
@@ -42,13 +40,6 @@ Additional Features:
 
 This concise introduction provides an overview of the Timesheet Management Application's key features and additional functionalities.
 
-## Requirements
-
-To run this application, you need the following:
-
-- Python 3.x (Check your Python version using `python --version`)
-- C++ build environment and compatible compiler (for the C++ part)
-
 ## Installation
 
 Clone the repository to your local machine:
@@ -61,10 +52,19 @@ Clone the repository to your local machine:
   cd Excel-Data-App
 ```
 
-Install the required Python packages by running the following command in the project's root directory:
+## Usage
+
+Create and activate a virtual environment:
 
 ```bash
-  pip install -r requirements.txt
+  pip install pipenv
+  pipenv install
+```
+
+Start the environment:
+
+```bash
+  pipenv shell
 ```
 
 ### Customizing the File Path
@@ -91,21 +91,6 @@ To compile the C++ part of the application, follow these steps:
 When you use the Timesheet Management Application and click the "Confirm" button, your work-related data will be saved in an Excel file. This Excel file acts as your digital timesheet, storing all the information you input.
 
 By default, the Excel file will be automatically created and saved in the `Excel-Data-App` folder within the project directory. You can easily access and manage your work records in this Excel file for record-keeping and analysis.
-
-## Usage
-
-Create and activate a virtual environment:
-
-```bash
-  pip install pipenv
-  pipenv install
-```
-
-Start the environment:
-
-```bash
-  pipenv shell
-```
 
 ## Email Sender using Python and Gmail API
 
