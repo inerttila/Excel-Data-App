@@ -1,9 +1,8 @@
-# Timesheet Management Application 
+# Timesheet Management Application
+
 ![Screenshot 2023-10-30 175452](https://github.com/inerttila/Excel-Data-App/assets/137422939/76cea38a-78b2-4b13-baa0-90e170f2232d)
 
-  
-  [Download The App](https://inerttila.github.io/Web-Page/)
-
+[Download The App](https://inerttila.github.io/Web-Page/)
 
 A Python and C++-based timesheet management application for tracking work hours and tasks. This application provides an easy-to-use interface for users to input their work-related data, which is then stored and managed in an Excel workbook.
 
@@ -21,6 +20,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 ## Introduction
 
 The Timesheet Management Application streamlines the recording and management of work-related data with efficiency and user-friendliness. It offers the following features:
+
 - Input work details: date, service line, type of service, company, task, hours worked, and notes.
 - Option menus for selecting categories.
 - A date picker for easy date selection.
@@ -29,6 +29,7 @@ The Timesheet Management Application streamlines the recording and management of
 - Data saved in Excel for record-keeping and analysis.
 
 Additional Features:
+
 - Weekly Sheet: Starts fresh each week for organized tracking.
 - Yearly Sheet: Separates data by week for readability.
 - Customizable Pop-Up Window Style: Tailor the user interface.
@@ -96,23 +97,14 @@ By default, the Excel file will be automatically created and saved in the `Excel
 Create and activate a virtual environment:
 
 ```bash
-  python -m venv venv
+  pip install pipenv
+  pipenv install
 ```
 
-```bash
-  venv\Scripts\activate
-```
-
-Install the required Python packages by running the following command :
+Start the environment:
 
 ```bash
-  pip install -r requirements.txt
-```
-
-Execute the Python script to run the application:
-
-```bash
-  python excel.pyw
+  pipenv shell
 ```
 
 ## Email Sender using Python and Gmail API
