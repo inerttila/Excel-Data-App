@@ -2,9 +2,12 @@ import os
 import http.server
 import socketserver
 import qrcode
+from tkinter import messagebox  # Import the messagebox module
+
+local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
 
 
-def generate_qr_code_and_start_server(file_path, filename, message):
+def generate_qr_code_and_start_server(file_path):
     excel_directory = os.path.dirname(file_path)
     qr_code_directory = os.path.join(excel_directory,)
 
@@ -20,11 +23,12 @@ def generate_qr_code_and_start_server(file_path, filename, message):
     Handler = http.server.SimpleHTTPRequestHandler
     httpd = socketserver.TCPServer(("", PORT), Handler)
 
-    print(f"Serving at http://localhost:{PORT}")
-    print(f"Scan the QR code to download the Excel file. {message}")
+    # Show a success message
+    messagebox.showinfo(
+        "Success", "Scan the QR code to download the Excel file.")
 
-    # Generate QR code with the local server URL and message
-    qr_data = f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx?message={message}"
+    # Generate QR code with the local server URL
+    qr_data = f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx"
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
@@ -38,12 +42,10 @@ def generate_qr_code_and_start_server(file_path, filename, message):
     img = qr.make_image(fill_color="black", back_color="white")
 
     # Save the image in the "qr_code_photo" directory
-    img.save(filename)
+    img.save("local_qrcode.png")
 
     httpd.serve_forever()
 
 
-# Example usage with a message
-excel_file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
-generate_qr_code_and_start_server(
-    excel_file_path, "local_qrcode.png", "Do you want to install the timesheet Excel?")
+def generate_qr_code_and_start_server_wrapper():
+    generate_qr_code_and_start_server(local_file_path)

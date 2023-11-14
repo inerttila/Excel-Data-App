@@ -1,12 +1,12 @@
-import tkinter as tk
-from tkinter import ttk
+import tkinter.ttk as ttk
+from qrcode_module import generate_qr_code_and_start_server_wrapper
 
 # Define the local file path for copying to the server
 local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
 
 
 def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file,
-                   display_weekly_total, create_backup):  # Add "send_email" here
+                   display_weekly_total, create_backup,  generate_qr_code_button,):  # Add "send_email" here
 
     # Create a style for the buttons
     button_style = ttk.Style()
@@ -55,10 +55,16 @@ def create_buttons(window, categories, max_button_width, select_date, confirm_in
     confirm_button.grid(row=len(categories) - 1, column=3,
                         padx=(5, 10), pady=1, sticky="e")
 
+    # Create a "Generate QR Code" button
+    generate_qr_code_button = ttk.Button(
+        window, text="Generate QR Code", command=generate_qr_code_and_start_server_wrapper, width=max_button_width, style="Custom.TButton")
+    generate_qr_code_button.grid(row=len(categories) - 1, column=4,
+                                 padx=(5, 10), pady=1, sticky="e")
+
     # # Create a "Send Email" button
     # send_email_button = ttk.Button(
     #     window, text="Send Email", command=send_email, width=max_button_width, style="Custom.TButton")
     # send_email_button.grid(row=len(categories) - 1, column=4,
     #                        padx=(5, 10), pady=1, sticky="e")
 
-    return select_date_button, confirm_button, send_file_button, open_file_button, total_button, create_backup,  # send_email
+    return select_date_button, confirm_button, send_file_button, open_file_button, total_button, create_backup, generate_qr_code_button,  # send_email

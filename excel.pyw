@@ -10,6 +10,7 @@ from backup_excel import create_backup
 from buttons import create_buttons
 from copyserver import copy_to_server
 from weekly_totals import calculate_weekly_total_hours
+from qrcode_module import generate_qr_code_and_start_server
 # from email_sender import send_email
 from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
                      Toplevel, simpledialog, ttk)
@@ -437,7 +438,7 @@ icon = tk.PhotoImage(
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
-window_width = 500
+window_width = 780
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
@@ -520,13 +521,13 @@ for i, category in enumerate(categories):
 
 # Calculate the maximum width among button labels
 button_labels = ["Confirm", "Send File",
-                 "Open File", "Total", "Select Date", "Backup", "send_email"]
+                 "Open File", "Total", "Select Date", "Backup", "send_email" "Generate QR Code"]
 max_button_width = max(len(label) for label in button_labels)
 
 # Call the create_buttons function to create the buttons
 buttons = create_buttons(
     window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total,
-    create_backup)  # Add "send_email" here
+    create_backup, generate_qr_code_and_start_server)  # Add "send_email" here
 
 # Start the main event loop for the application window
 window.mainloop()
