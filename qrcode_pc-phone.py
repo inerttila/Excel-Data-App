@@ -4,7 +4,7 @@ import socketserver
 import qrcode
 
 
-def generate_qr_code_and_start_server(file_path, filename):
+def generate_qr_code_and_start_server(file_path, filename, message):
     excel_directory = os.path.dirname(file_path)
     qr_code_directory = os.path.join(excel_directory,)
 
@@ -21,16 +21,17 @@ def generate_qr_code_and_start_server(file_path, filename):
     httpd = socketserver.TCPServer(("", PORT), Handler)
 
     print(f"Serving at http://localhost:{PORT}")
-    print(f"Scan the QR code to download the Excel file on your phone.")
+    print(f"Scan the QR code to download the Excel file. {message}")
 
-    # Generate QR code with the local server URL
+    # Generate QR code with the local server URL and message
+    qr_data = f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx?message={message}"
     qr = qrcode.QRCode(
         version=1,
         error_correction=qrcode.constants.ERROR_CORRECT_L,
         box_size=10,
         border=4,
     )
-    qr.add_data(f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx")
+    qr.add_data(qr_data)
     qr.make(fit=True)
 
     # Create an image from the QR Code instance
@@ -42,5 +43,7 @@ def generate_qr_code_and_start_server(file_path, filename):
     httpd.serve_forever()
 
 
+# Example usage with a message
 excel_file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
-generate_qr_code_and_start_server(excel_file_path, "local_qrcode.png")
+generate_qr_code_and_start_server(
+    excel_file_path, "local_qrcode.png", "Do you want to install the timesheet Excel?")
