@@ -1,6 +1,0 @@
-ECHO is on.
-Timesheet-managementt.xlsx
-.gitignore
-.DS_StoreMedia 
-__pycache__/
-local_qrcode.png
