@@ -46,9 +46,6 @@ Clone the repository to your local machine:
 
 ```bash
   git clone https://github.com/inerttila/Excel-Data-App.git
-```
-
-```bash
   cd Excel-Data-App
 ```
 
@@ -59,11 +56,6 @@ Create and activate a virtual environment:
 ```bash
   pip install pipenv
   pipenv install
-```
-
-Start the environment:
-
-```bash
   pipenv shell
 ```
 
