@@ -6,8 +6,6 @@
 
 A Python and C++-based timesheet management application for tracking work hours and tasks. This application provides an easy-to-use interface for users to input their work-related data, which is then stored and managed in an Excel workbook.
 
-## Table of Contents
-
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
