@@ -69,7 +69,7 @@ You can customize the file path where the Excel file is saved based on your pref
   file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
 ```
 
-## Usage with Compiling the C++ part
+## Usage with Compiling the C++ Part
 
 To compile the C++ part of the application, follow these steps:
 
