@@ -11,7 +11,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Usage with Compiling the C++](#usage-with-compiling-the-c++)
+- [Usage with Compiling the C Part](#usage-with-compiling-the-c-part)
 - [Email Sender using Python and Gmail API](#Email-Sender-using-Python-and-Gmail-API)
 - [Contact](#contact)
 
@@ -69,7 +69,7 @@ You can customize the file path where the Excel file is saved based on your pref
   file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
 ```
 
-## Usage with Compiling the C++
+## Usage with Compiling the C part
 
 To compile the C++ part of the application, follow these steps:
 
