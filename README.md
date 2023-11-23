@@ -11,7 +11,7 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Introduction](#introduction)
 - [Installation](#installation)
 - [Usage](#usage)
-- [Usage with Compiling the C++ Part (main.cpp)](#Usage-with-Compiling-the-C++-Part-main.cpp)
+- [Usage with Compiling the C++ Part (main.cpp)](#usage-with-compiling-the-c++-part-main.cpp)
 - [Email Sender using Python and Gmail API](#Email-Sender-using-Python-and-Gmail-API)
 - [Contact](#contact)
 
