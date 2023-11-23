@@ -23,7 +23,7 @@ excel_file_path = os.path.join(base_dir, excel_file_name)
 
 # Constants for local and server file paths
 local_file_path = excel_file_path
-server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
+server_file_path = r"\\192.168.40.21\\Fileshare SV1\\Timesheet-managementt.xlsx"
 
 
 # Calculate the weekly total hours by summing the hours in the worksheet
