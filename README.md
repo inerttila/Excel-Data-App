@@ -35,6 +35,8 @@ Additional Features:
 - Excel Backup Automator: Automated file backups.
 - Email Excel Files: Secure data sharing via Gmail API.
 - Dockerfile for Python app with GUI.
+- Inno Setup desktop app.
+- QR code generator for excel file tranfer.
 
 This concise introduction provides an overview of the Timesheet Management Application's key features and additional functionalities.
 
