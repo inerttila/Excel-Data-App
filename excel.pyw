@@ -176,9 +176,11 @@ def is_last_entry_on_sunday(worksheet):
 
     last_date_value = worksheet.cell(row=worksheet.max_row, column=1).value
     if last_date_value is not None:
-        if not isinstance(last_date_value, datetime.datetime):
-            last_date_value = datetime.datetime.strptime(
-                last_date_value, "%Y-%m-%d")
+        last_date_value = datetime.datetime.strptime(
+            last_date_value, "%Y-%m-%d")
+        # Friday is represented as 4 in the weekday() function
+        return last_date_value.weekday() == 4
+    return False
     
 
 
