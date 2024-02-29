@@ -11,7 +11,6 @@ A Python and C++-based timesheet management application for tracking work hours 
 - [Usage](#usage)
 - [Usage with Compiling the C++ Part](#usage-with-compiling-the-c-part)
 - [Email Sender using Python and Gmail API](#Email-Sender-using-Python-and-Gmail-API)
-- [Contact](#contact)
 
 ## Introduction
 
@@ -95,11 +94,3 @@ Before using this code, ensure you have the following prerequisites in place:
 ```bash
   pip install google-auth google-auth-oauthlib google-auth-httplib2 google-api-python-client
 ```
-
-## Contact
-
-For inquiries or assistance, feel free to reach out through the following channels:
-
-- LinkedIn: [Inert Tila](https://al.linkedin.com/in/inerttila)
-
-You can email me for any questions or support related to this project, and you can also connect with me on LinkedIn to stay updated on my professional activities.
