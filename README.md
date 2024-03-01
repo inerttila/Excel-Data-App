@@ -1,6 +1,4 @@
-# Timesheet Management Application
-
-![Screenshot 2023-10-30 175452](https://github.com/inerttila/Excel-Data-App/assets/137422939/76cea38a-78b2-4b13-baa0-90e170f2232d)
+## Timesheet Management Application
 
 [Download The App](https://drive.google.com/file/d/1dSjV0SLgc-BXZlFEGQqjRl5wag4Oxric/view)
 
