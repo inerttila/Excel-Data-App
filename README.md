@@ -1,3 +1,6 @@
+Software Developer | Python, Django, JavaScript | Docker | Cloud Computing | Web Development
+
+
 ## Timesheet Management Application
 
 [Download The App](https://drive.google.com/file/d/1dSjV0SLgc-BXZlFEGQqjRl5wag4Oxric/view)
