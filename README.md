@@ -51,12 +51,10 @@ Clone the repository to your local machine:
 
 ## Usage
 
-Create and activate a virtual environment:
-
 ```bash
-  pip install pipenv
-  pipenv install
-  pipenv shell
+  pip install tkcalendar
+  pip install qrcode
+  pip install openpyxl
 ```
 
 ### Customizing the File Path
