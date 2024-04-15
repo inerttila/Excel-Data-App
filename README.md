@@ -57,16 +57,6 @@ Clone the repository to your local machine:
   pip install openpyxl
 ```
 
-### Customizing the File Path
-
-You can customize the file path where the Excel file is saved based on your preferences. To do this, follow these steps:
-
-1. Locate the following line of code in the Python script :
-
-```python
-  file_path = 'C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx'
-```
-
 ## Usage with Compiling the C++ Part
 
 To compile the C++ part of the application, follow these steps:
