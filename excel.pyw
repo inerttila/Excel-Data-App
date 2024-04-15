@@ -114,7 +114,7 @@ def select_date():
 
     # Set the icon for the pop-up window
     icon = tk.PhotoImage(
-        file="C:\\Users\\User\\Desktop\\Excel-Data-App\\Media\\otr.png")
+        file="Media\\otr.png")
     top.iconphoto(False, icon)
 
     style = ttk.Style(top)
@@ -438,7 +438,7 @@ window = Tk()
 window.title("Timesheet Application")
 window.configure(background="#000000")
 icon = tk.PhotoImage(
-    file="C:\\Users\\User\\Desktop\\Excel-Data-App\\Media\\otr.png")
+    file="Media\\otr.png")
 window.iconphoto(False, icon)
 
 # Set the dimensions and position of the window
