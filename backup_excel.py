@@ -6,10 +6,10 @@ import tkinter.messagebox as messagebox
 
 def create_backup():
     # Source path (path to the original Excel file)
-    source_path = "Excel-Data-App\\Timesheet-managementt.xlsx"
+    source_path = "Timesheet-managementt.xlsx"
 
     # Destination path (path to the backup folder)
-    backup_folder = "Excel-Data-App\\BackupFolder"
+    backup_folder = "BackupFolder"
 
     # Create the backup folder if it doesn't exist
     if not os.path.exists(backup_folder):

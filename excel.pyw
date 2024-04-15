@@ -18,16 +18,8 @@ from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
 
 # Define the file name
 excel_file_name = "Timesheet-managementt.xlsx"
-
-# Define the relative file path within the project directory
-relative_file_path = "Excel-Data-App" + excel_file_name
-
-# Get the base directory of the script
 base_dir = os.path.dirname(os.path.abspath(__file__))
-
-# Combine the base directory with the relative file path to get the full file path
-excel_file_path = os.path.join(base_dir, relative_file_path)
-
+excel_file_path = os.path.join(base_dir, excel_file_name)
 print(excel_file_path)
 
 

@@ -4,9 +4,8 @@ import os
 
 # Define the local file path for copying to the server
 excel_file_name = "Timesheet-managementt.xlsx"
-relative_file_path = "Excel-Data-App" + excel_file_name
 base_dir = os.path.dirname(os.path.abspath(__file__))
-excel_file_path = os.path.join(base_dir, relative_file_path)
+excel_file_path = os.path.join(base_dir, excel_file_name)
 
 def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file,
                    display_weekly_total, create_backup,  generate_qr_code_button,):  # Add "send_email" here
