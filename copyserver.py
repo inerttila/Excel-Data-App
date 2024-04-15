@@ -4,8 +4,8 @@ import tkinter.messagebox as messagebox
 
 # Define file paths as constants
 base_dir = os.path.dirname(os.path.abspath(__file__))
-excel_file_name = "Timesheet-managementt.xlsx"
-local_file_path = os.path.join(base_dir, excel_file_name)
+excel_file_path = "Timesheet-managementt.xlsx"
+local_file_path = os.path.join(base_dir, excel_file_path)
 server_file_path = r"\\192.168.40.21\Fileshare SV1\Timesheet-managementt.xlsx"
 
 

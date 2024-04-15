@@ -4,7 +4,11 @@ import socketserver
 import qrcode
 from tkinter import messagebox  # Import the messagebox module
 
-local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
+# Define the file name
+excel_file_name = "Timesheet-managementt.xlsx"
+relative_file_path = "Excel-Data-App/" + excel_file_name
+base_dir = os.path.dirname(os.path.abspath(__file__))
+local_file_path = os.path.join(base_dir, relative_file_path)
 
 
 def generate_qr_code_and_start_server(file_path):

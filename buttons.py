@@ -1,9 +1,12 @@
 import tkinter.ttk as ttk
 from qrcode_module import generate_qr_code_and_start_server_wrapper
+import os
 
 # Define the local file path for copying to the server
-local_file_path = "C:\\Users\\User\\Desktop\\Excel-Data-App\\Timesheet-managementt.xlsx"
-
+excel_file_name = "Timesheet-managementt.xlsx"
+relative_file_path = "Excel-Data-App" + excel_file_name
+base_dir = os.path.dirname(os.path.abspath(__file__))
+excel_file_path = os.path.join(base_dir, relative_file_path)
 
 def create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file,
                    display_weekly_total, create_backup,  generate_qr_code_button,):  # Add "send_email" here
@@ -27,7 +30,7 @@ def create_buttons(window, categories, max_button_width, select_date, confirm_in
 
     # Create a "Send File" button for copying the Excel file to the server
     send_file_button = ttk.Button(
-        window, text="Send File", command=lambda: copy_to_server(local_file_path), width=max_button_width, style="Custom.TButton"
+        window, text="Send File", command=lambda: copy_to_server(excel_file_path), width=max_button_width, style="Custom.TButton"
     )
     send_file_button.grid(row=len(categories) - 4, column=3,
                           padx=(50, 10), pady=1, sticky="e")
