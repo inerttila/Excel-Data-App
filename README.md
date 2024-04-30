@@ -52,9 +52,7 @@ Clone the repository to your local machine:
 ## Usage
 
 ```bash
-  pip install tkcalendar
-  pip install qrcode
-  pip install openpyxl
+  pip install requirement.txt
 ```
 
 ## Usage with Compiling the C++ Part
