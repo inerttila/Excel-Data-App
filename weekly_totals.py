@@ -24,3 +24,4 @@ def calculate_weekly_total_hours(worksheet):
                     weekly_total_hours += float(row[0])
 
     return weekly_total_hours
+
