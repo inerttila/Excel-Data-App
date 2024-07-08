@@ -365,7 +365,7 @@ def set_column_widths(sheet):
         "D": 20,  # Company
         "E": 20,  # Task
         "F": 10,  # Hours
-        "G": 100,  # Notes
+        "G": 400,  # Notes
     }
 
     for column, width in column_widths.items():
@@ -419,7 +419,7 @@ def create_sheet_with_headers(headers, rd):
             "D": 20,  # Company
             "E": 20,  # Task
             "F": 10,  # Hours
-            "G": 100,  # Notes
+            "G": 400,  # Notes
         }
         for column, width in column_widths.items():
             new_sheet.column_dimensions[column].width = width
