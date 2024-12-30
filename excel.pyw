@@ -15,19 +15,15 @@ from qrcode_module import generate_qr_code_and_start_server
 from tkinter import (Entry, Label, OptionMenu, StringVar, Text, Tk,
                      Toplevel, simpledialog, ttk)
 
-
 # Define the file name
 excel_file_name = "Timesheet-managementt.xlsx"
 base_dir = os.path.dirname(os.path.abspath(__file__))
 excel_file_path = os.path.join(base_dir, excel_file_name)
 print(excel_file_path)
 
-
-
 # Constants for local and server file paths
 local_file_path = excel_file_path
 server_file_path = r"\\192.168.40.21\\Fileshare SV1\\Timesheet-managementt.xlsx"
-
 
 # Calculate the weekly total hours by summing the hours in the worksheet
 def display_weekly_total():
@@ -37,7 +33,6 @@ def display_weekly_total():
     # Show the total hours message as a messagebox
     weekly_total_message = f"Total Hours: {weekly_total_hours} hours"
     messagebox.showinfo("Total Hours", weekly_total_message)
-
 
 # Function to apply header styles to a worksheet
 def apply_header_styles(worksheet, headers):
@@ -50,10 +45,8 @@ def apply_header_styles(worksheet, headers):
         cell = worksheet.cell(row=1, column=col_num, value=header)
         cell.font = header_font
         cell.fill = header_fill
-        # Apply right alignment to numeric columns (e.g., 'Hours')
         row_height = 30
         worksheet.row_dimensions[1].height = row_height
-
 
 # Function to create or get a sheet from a workbook
 def create_or_get_sheet(workbook, sheet_name):
@@ -62,21 +55,18 @@ def create_or_get_sheet(workbook, sheet_name):
     except KeyError:
         return workbook.create_sheet(sheet_name)
 
-
 # Function to create a directory if it doesn't exist
 def create_directory_if_not_exists(file_path):
     directory = os.path.dirname(file_path)
     os.makedirs(directory, exist_ok=True)
-
 
 # Create a new workbook if it doesn't exist
 def load_or_create_workbook(file_path):
     try:
         return openpyxl.load_workbook(file_path)
     except FileNotFoundError:
-        # Save the workbook
+        workbook = openpyxl.Workbook()
         workbook.save(file_path)
-
         return workbook
 
 
@@ -166,7 +156,6 @@ def validate_hours_input(value):
         return False
     return True
 
-
 # Function to validate notes input
 def validate_notes_input(value):
     return True
@@ -242,16 +231,19 @@ def confirm_input():
                         input_values[category].set("")
                     return  # Exit the function without saving
 
-        # Create or get the "2024" sheet and save data there too
-        sheet_2024 = create_or_get_sheet(workbook, "2024")
-        set_column_widths(sheet_2024)
+        # Create or get the sheet for the current year dynamically and save data there too
+        current_year = str(datetime.date.today().year)
+        sheet_year = create_or_get_sheet(workbook, current_year)
+        set_column_widths(sheet_year)
+        
         today = datetime.date.today()
         is_monday = today.weekday() == 0
+        
         # Check if the last entry in the original sheet is on Sunday
         if is_last_entry_on_sunday(worksheet) and is_monday:
             # Add an empty row before appending new data on Monday
-            sheet_name_to_delete = "Sheet"
-            delete_sheet("s", sheet_name_to_delete)
+            if "Sheet" in workbook.sheetnames:
+                delete_sheet(workbook, "Sheet") 
             header_row = [
                 "Date",
                 "Service Line",
@@ -261,30 +253,31 @@ def confirm_input():
                 "Hours",
                 "Notes",
             ]
-            create_sheet_with_headers(header_row, row_data)
-            sheet_2024.append([])
-
+            if not worksheet.max_row: 
+                worksheet.append(header_row)
+            if not sheet_year.max_row:  
+                sheet_year.append(header_row)
+            sheet_year.append([])  
+        
         worksheet.append(row_data)
-        sheet_2024.append(row_data)
+        sheet_year.append(row_data)
         workbook.save(excel_file_path)
-
-        # Reset input values and user interface elements
+        
         for category in categories:
             input_values[category].set("")
-
+        
             if category == "Notes":
                 entry.delete(1.0, "end")
-
+        
             if category == "Company":
                 reset_option_menu(company_option_menu, company_options)
             elif category == "Service Line":
                 reset_option_menu(service_line_option_menu, service_options)
             elif category == "Type of Service":
-                reset_option_menu(type_of_service_option_menu,
-                                  type_of_service_options)
+                reset_option_menu(type_of_service_option_menu, type_of_service_options)
             elif category == "Task":
                 reset_option_menu(task_option_menu, task_options)
-
+        
         messagebox.showinfo("Success", "Data saved successfully.")
 
     except Exception as e:
@@ -437,101 +430,69 @@ def create_sheet_with_headers(headers, rd):
 window = Tk()
 window.title("Timesheet Application")
 window.configure(background="#000000")
-icon = tk.PhotoImage(
-    file="Media\\otr.png")
+icon = tk.PhotoImage(file="Media\\otr.png")
 window.iconphoto(False, icon)
 
-# Set the dimensions and position of the window
 window_width = 780
 window_height = 300
 screen_width = window.winfo_screenwidth()
 screen_height = window.winfo_screenheight()
 x_coordinate = (screen_width - window_width) // 2
 y_coordinate = (screen_height - window_height) // 2
-window.geometry(
-    f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
+window.geometry(f"{window_width}x{window_height}+{x_coordinate}+{y_coordinate}")
 
 # Create labels and input fields for each category
 for i, category in enumerate(categories):
-    label = Label(window, text=category,
-                  background="#000000", foreground="#FCFCFC")
+    label = Label(window, text=category, background="#000000", foreground="#FCFCFC")
     pady_value = 6
     label.grid(row=i, column=0, padx=(10, 20), pady=(pady_value, pady_value))
 
-    # Create input fields based on the category
     if category == "Company":
         input_values[category] = StringVar(window, company_options[0])
-        company_option_menu = OptionMenu(
-            window, input_values[category], *company_options
-        )
+        company_option_menu = OptionMenu(window, input_values[category], *company_options)
         company_option_menu.config(width=26)
         company_option_menu.category = category
         company_option_menu.grid(row=i, column=1)
     elif category == "Service Line":
         input_values[category] = StringVar(window, service_options[0])
-        service_line_option_menu = OptionMenu(
-            window, input_values[category], *service_options
-        )
+        service_line_option_menu = OptionMenu(window, input_values[category], *service_options)
         service_line_option_menu.config(width=26)
         service_line_option_menu.category = category
         service_line_option_menu.grid(row=i, column=1)
     elif category == "Type of Service":
         input_values[category] = StringVar(window, type_of_service_options[0])
-        type_of_service_option_menu = OptionMenu(
-            window, input_values[category], *type_of_service_options
-        )
+        type_of_service_option_menu = OptionMenu(window, input_values[category], *type_of_service_options)
         type_of_service_option_menu.config(width=26)
         type_of_service_option_menu.category = category
         type_of_service_option_menu.grid(row=i, column=1)
     elif category == "Task":
         input_values[category] = StringVar(window, task_options[0])
-        task_option_menu = OptionMenu(
-            window, input_values[category], *task_options)
+        task_option_menu = OptionMenu(window, input_values[category], *task_options)
         task_option_menu.config(width=26)
         task_option_menu.category = category
         task_option_menu.grid(row=i, column=1)
     elif category == "Date":
         input_values[category] = StringVar(window)
-        date_label = Label(
-            window, textvariable=input_values[category], bg="#000000", fg="#FCFCFC")
+        date_label = Label(window, textvariable=input_values[category], bg="#000000", fg="#FCFCFC")
         date_label.grid(row=i, column=1)
-
     elif category == "Hours":
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_hours_input), "%P")
-        entry = Entry(
-            window,
-            textvariable=input_values[category],
-            validate="key",
-            validatecommand=vcmd,
-            font=("Arial", 10),
-            width=28,
-        )
+        entry = Entry(window, textvariable=input_values[category], validate="key", validatecommand=vcmd, font=("Arial", 10), width=28)
         entry.grid(row=i, column=1, sticky="w")
     elif category == "Notes":
         input_values[category] = StringVar(window)
         vcmd = (window.register(validate_notes_input), "%P")
-        entry = Text(
-            window,
-            height=4,
-            width=28,
-            font=("Arial", 10),
-        )
+        entry = Text(window, height=4, width=28, font=("Arial", 10))
         entry.grid(row=i, column=1, columnspan=2, sticky="w")
     else:
         input_values[category] = StringVar(window)
         entry = Entry(window, textvariable=input_values[category])
         entry.grid(row=i, column=1, sticky="w")
 
-# Calculate the maximum width among button labels
-button_labels = ["Confirm", "Send File",
-                 "Open File", "Total", "Select Date", "Backup", "send_email" "Generate QR Code"]
+button_labels = ["Confirm", "Send File", "Open File", "Total", "Select Date", "Backup", "Generate QR Code"]
 max_button_width = max(len(label) for label in button_labels)
 
-# Call the create_buttons function to create the buttons
-buttons = create_buttons(
-    window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total,
-    create_backup, generate_qr_code_and_start_server)  # Add "send_email" here
+buttons = create_buttons(window, categories, max_button_width, select_date, confirm_input, copy_to_server, open_excel_file, display_weekly_total, create_backup, generate_qr_code_and_start_server)
 
-# Start the main event loop for the application window
 window.mainloop()
