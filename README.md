@@ -1,6 +1,5 @@
 ## Timesheet Management Application
 
-[Download The App](https://drive.google.com/file/d/1dSjV0SLgc-BXZlFEGQqjRl5wag4Oxric/view)
 
 A Python and C++-based timesheet management application for tracking work hours and tasks. This application provides an easy-to-use interface for users to input their work-related data, which is then stored and managed in an Excel workbook.
 
