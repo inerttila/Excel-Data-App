@@ -231,11 +231,17 @@ def confirm_input():
                         input_values[category].set("")
                     return  # Exit the function without saving
 
-        # Create or get the "2024" sheet and save data there too
-        sheet_2024 = create_or_get_sheet(workbook, "2024")
-        set_column_widths(sheet_2024)
+        # Get the current year dynamically
+        current_year = datetime.date.today().year
+        sheet_name = str(current_year)
+
+        # Create or get the sheet based on the current year
+        sheet = create_or_get_sheet(workbook, sheet_name)
+        set_column_widths(sheet)
+
         today = datetime.date.today()
         is_monday = today.weekday() == 0
+        
         # Check if the last entry in the original sheet is on Sunday
         if is_last_entry_on_sunday(worksheet) and is_monday:
             # Add an empty row before appending new data on Monday
@@ -251,10 +257,12 @@ def confirm_input():
                 "Notes",
             ]
             create_sheet_with_headers(header_row, row_data)
-            sheet_2024.append([])
+            sheet.append([])
+
         worksheet.append(row_data)
-        sheet_2024.append(row_data)
+        sheet.append(row_data)
         workbook.save(excel_file_path)
+        
         # Reset input values and user interface elements
         for category in categories:
             input_values[category].set("")
