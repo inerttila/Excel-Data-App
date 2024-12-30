@@ -2,54 +2,76 @@ import os
 import http.server
 import socketserver
 import qrcode
-from tkinter import messagebox  # Import the messagebox module
+from tkinter import messagebox
+import socket  # To dynamically get the local IP address
 
-# Define the file name
+
+# Define the file name and path
 excel_file_name = "Timesheet-managementt.xlsx"
-relative_file_path = "Excel-Data-App/" + excel_file_name
 base_dir = os.path.dirname(os.path.abspath(__file__))
-local_file_path = os.path.join(base_dir, relative_file_path)
+local_file_path = os.path.join(base_dir, excel_file_name)
+
+
+def get_local_ip():
+    """Get the local IP address of the machine."""
+    hostname = socket.gethostname()
+    return socket.gethostbyname(hostname)
 
 
 def generate_qr_code_and_start_server(file_path):
-    excel_directory = os.path.dirname(file_path)
-    qr_code_directory = os.path.join(excel_directory,)
+    """Generate a QR code for downloading the file and start an HTTP server."""
+    try:
+        # Ensure the file exists
+        if not os.path.exists(file_path):
+            messagebox.showerror("Error", f"File not found: {file_path}")
+            return
 
-    # Create the "qr_code_photo" directory if it doesn't exist
-    os.makedirs(qr_code_directory, exist_ok=True)
+        # Set the server's base directory
+        excel_directory = os.path.dirname(file_path)
+        os.chdir(excel_directory)
 
-    os.chdir(excel_directory)  # Set the server's base directory
+        # Specify the port to run the server on
+        PORT = 8000
 
-    # Specify the port to run the server on
-    PORT = 8000
+        # Start the server
+        Handler = http.server.SimpleHTTPRequestHandler
+        httpd = socketserver.TCPServer(("", PORT), Handler)
 
-    # Start the server
-    Handler = http.server.SimpleHTTPRequestHandler
-    httpd = socketserver.TCPServer(("", PORT), Handler)
+        # Get the local IP address dynamically
+        local_ip = get_local_ip()
+        qr_data = f"http://{local_ip}:{PORT}/{excel_file_name}"
 
-    # Show a success message
-    messagebox.showinfo(
-        "Success", "Scan the QR code to download the Excel file.")
+        # Generate the QR code
+        qr = qrcode.QRCode(
+            version=1,
+            error_correction=qrcode.constants.ERROR_CORRECT_L,
+            box_size=10,
+            border=4,
+        )
+        qr.add_data(qr_data)
+        qr.make(fit=True)
 
-    # Generate QR code with the local server URL
-    qr_data = f"http://192.168.40.14:{PORT}/Timesheet-managementt.xlsx"
-    qr = qrcode.QRCode(
-        version=1,
-        error_correction=qrcode.constants.ERROR_CORRECT_L,
-        box_size=10,
-        border=4,
-    )
-    qr.add_data(qr_data)
-    qr.make(fit=True)
+        # Create an image from the QR Code instance
+        img = qr.make_image(fill_color="black", back_color="white")
 
-    # Create an image from the QR Code instance
-    img = qr.make_image(fill_color="black", back_color="white")
+        # Save the QR code image
+        qr_image_path = os.path.join(excel_directory, "local_qrcode.png")
+        img.save(qr_image_path)
 
-    # Save the image in the "qr_code_photo" directory
-    img.save("local_qrcode.png")
+        # Show success message with instructions
+        messagebox.showinfo(
+            "Success",
+            f"Scan the QR code to download the Excel file.\nQR Code saved at: {qr_image_path}"
+        )
 
-    httpd.serve_forever()
+        # Serve the HTTP server
+        print(f"Serving on {local_ip}:{PORT}")
+        httpd.serve_forever()
+
+    except Exception as e:
+        messagebox.showerror("Error", str(e))
 
 
 def generate_qr_code_and_start_server_wrapper():
+    """Wrapper function for generating QR code and starting the server."""
     generate_qr_code_and_start_server(local_file_path)
