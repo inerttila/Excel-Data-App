@@ -430,7 +430,7 @@ def create_sheet_with_headers(headers, rd):
 window = Tk()
 window.title("Timesheet Application")
 window.configure(background="#000000")
-icon = tk.PhotoImage(file="Media\\otr.png")
+icon = tk.PhotoImage(file="Media/otr.png")
 window.iconphoto(False, icon)
 
 window_width = 780

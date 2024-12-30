@@ -1,0 +1,15 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: excel_app_container
+    image: inert/excel-data:new
+    networks:
+      - app-network
+
+networks:
+  app-network:
+    driver: bridge
