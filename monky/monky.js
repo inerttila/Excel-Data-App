@@ -21,7 +21,7 @@
     if (amountElement) {
       amountElement.textContent = "21.21111"; // Update the amount
     } else {
-      console.error("Amount element not found.");
+      console.warn("Amount element not found, retrying...");
     }
   }
 
@@ -34,7 +34,7 @@
     if (dateTimeElement) {
       dateTimeElement.textContent = "13:15 8/21/2021"; // Update the time and date
     } else {
-      console.error("Date and time element not found.");
+      console.warn("Date and time element not found, retrying...");
     }
   }
 
@@ -43,11 +43,13 @@
     modifyTimeAndDate();
   }
 
-  window.addEventListener("load", modifyContent);
-
-  const observer = new MutationObserver(() => {
+  document.addEventListener("DOMContentLoaded", () => {
     modifyContent();
-  });
 
-  observer.observe(document.body, { childList: true, subtree: true });
+    const observer = new MutationObserver(() => {
+      modifyContent();
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+  });
 })();
